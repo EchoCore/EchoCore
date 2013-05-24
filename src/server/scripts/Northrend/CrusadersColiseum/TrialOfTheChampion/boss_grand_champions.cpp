@@ -503,7 +503,6 @@ class boss_warrior_toc5 : public CreatureScript
             uiPhase = 0;
             uiPhaseTimer = 0;
 
-            me->SetReactState(REACT_PASSIVE);
         }
 
         InstanceScript* pInstance;
@@ -678,7 +677,6 @@ class boss_mage_toc5 : public CreatureScript
             uiPhase = 0;
             uiPhaseTimer = 0;
 
-            me->SetReactState(REACT_PASSIVE);
         }
 
         InstanceScript* pInstance;
@@ -853,7 +851,6 @@ class boss_shaman_toc5 : public CreatureScript
             uiPhase = 0;
             uiPhaseTimer = 0;
 
-            me->SetReactState(REACT_PASSIVE);
          }
 
         InstanceScript* pInstance;
@@ -1044,7 +1041,6 @@ class boss_hunter_toc5 : public CreatureScript
             uiPhase = 0;
             uiPhaseTimer = 0;
 
-            me->SetReactState(REACT_PASSIVE);
          }
 
         InstanceScript* pInstance;
