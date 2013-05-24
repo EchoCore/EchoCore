@@ -504,8 +504,6 @@ class boss_warrior_toc5 : public CreatureScript
             uiPhaseTimer = 0;
 
             me->SetReactState(REACT_PASSIVE);
-            // THIS IS A HACK, SHOULD BE REMOVED WHEN THE EVENT IS FULL SCRIPTED
-            me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NON_ATTACKABLE);
         }
 
         InstanceScript* pInstance;
@@ -681,8 +679,6 @@ class boss_mage_toc5 : public CreatureScript
             uiPhaseTimer = 0;
 
             me->SetReactState(REACT_PASSIVE);
-            // THIS IS A HACK, SHOULD BE REMOVED WHEN THE EVENT IS FULL SCRIPTED
-            me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NON_ATTACKABLE);
         }
 
         InstanceScript* pInstance;
@@ -858,9 +854,7 @@ class boss_shaman_toc5 : public CreatureScript
             uiPhaseTimer = 0;
 
             me->SetReactState(REACT_PASSIVE);
-            // THIS IS A HACK, SHOULD BE REMOVED WHEN THE EVENT IS FULL SCRIPTED
-            me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NON_ATTACKABLE);
-        }
+         }
 
         InstanceScript* pInstance;
 
@@ -1051,9 +1045,7 @@ class boss_hunter_toc5 : public CreatureScript
             uiPhaseTimer = 0;
 
             me->SetReactState(REACT_PASSIVE);
-            // THIS IS A HACK, SHOULD BE REMOVED WHEN THE EVENT IS FULL SCRIPTED
-            me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NON_ATTACKABLE);
-        }
+         }
 
         InstanceScript* pInstance;
 
@@ -1291,9 +1283,6 @@ class boss_rouge_toc5 : public CreatureScript
 
             hasBeenInCombat = false;
 
-            me->SetReactState(REACT_PASSIVE);
-            // THIS IS A HACK, SHOULD BE REMOVED WHEN THE EVENT IS FULL SCRIPTED
-            me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NON_ATTACKABLE);
         }
 
         InstanceScript* pInstance;
