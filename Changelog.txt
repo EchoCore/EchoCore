@@ -1,3 +1,54 @@
+#########################################################################
+#              ______     _            _____                            #
+#             |  ____|   | |          / ____|                           #
+#             | |__   ___| |__   ___ | |     ___  _ __ ___              #
+#             |  __| / __| '_ \ / _ \| |    / _ \| '__/ _ \             #
+#             | |___| (__| | | | (_) | |___| (_) | | |  __/             #
+#             |______\___|_| |_|\___/ \_____\___/|_|  \___|             #
+#                                                                       #
+#                                      Changelog                        #
+#                                                                       #
+#########################################################################
+
+[25] --> DB/Quest: Fix: Foolish Endeavors (Thx dr-j).
+[24] --> DB/SAI: convert EAI of some Redridge Creatures (Thx Kirkhammett).
+[23] --> DB/Quest: Fix: Standards and Practices.
+[22] --> DB/Quest: Fix: Mistcaller Yngvar.
+[21] --> DB/Quest: Fix: Conversing With the Depths (Thx Pitcrawler).
+[20] --> DB/Quest: Fix: Rallying the Troops.
+[19] --> DB/Quest: Creature_AI to Smart_AI Conversion for Proto-Drake Egg.
+[18] --> DB/Quest: Update: Arena Grandmaster.
+[17] --> DB/Quest: Fix: The Focus on the Beach, Atop the Woodlands, The End of the Line (Thx Pitcrawler).
+[16] --> DB/Quest: Fix: The Heart of the Storm (Thx Pitcrawler).
+[15] --> DB/Quest: Fix: In Search Of Answers.
+[14] --> DB/Quest: Fix: A Suitable Disguise.
+[13] --> DB/Quest: Hack: The Frost Wyrm and its Master.
+[12] --> DB/Quest: Hack: Investigate the Blue Recluse.
+[11] --> Add some usefule tele locations.
+[10] --> DB/Instance: Fix: Emblems of bosses, Halls of Stone. (Thx Torrad)
+[9] --> DB/Instance: Fix: Vault of Archavon correct Emblems. (Thx Torrad)
+[8] --> Disable the invisible walls in Trial of the Crusaders. (Thx Torrad)
+[7] --> DB/Instance: Fix: Trial of the Champion. (Thx Torrad)
+[6] --> Exploit Fix, Crash Server with Mind Control.
+[5] --> Update faction for Ribbly Schraubstutz.
+[4] --> DB/Quest: Fix: Quests in Wintergrasp (Thx Torrad).
+[3] --> Fix mounted champions in Trial Of the Champion (Thx Torrad).
+[2] --> Add TDB & GTDB.
+[1] --> Regroup sql & fix some errors.
+
+#########################################################################
+#                                                                       #
+# Thanks to:                                                            #
+#                                                                       #
+#            https://github.com/garyfisher                              #
+#            https://github.com/Torrad                                  #
+#            https://github.com/Pitcrawler                              #
+#            https://github.com/Kirkhammett                             #
+#            https://github.com/dr-j                                    #
+#                                                                       #
+#########################################################################
+
+
 ############################################################################################
 #              ______                   ______                   _____                     #
 #             / _____)                 |  ___ \                 / ___ \       _            #
