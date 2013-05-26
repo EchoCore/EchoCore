@@ -1,8 +1,8 @@
 /*
  * DB/Instance: Fix: Emblems of bosses, Halls of Stone.
  * Fix all bosses in Halls of Stone.
- * Before: They droppted Emblem of Heroes
- * Now: They drop Embleme of Triomph
+ * Before: They droppted Emblem of Heroism.
+ * Now: They drop Emblem of Triumph.
  *
  * Fixed mode: 5 Man Heroic (Non-Herioc was allready fixed)
 */

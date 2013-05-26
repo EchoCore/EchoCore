@@ -1,4 +1,4 @@
--- Delete old ports / Add new one
+-- Delete old ports / Add new one.
 DELETE FROM `game_tele` WHERE `name` LIKE 'icc%' OR `name` LIKE 'hdz%' OR `name` LIKE 'tdm%' OR `name` LIKE 'rubi%' OR `name` LIKE 'Agmondkuppe' OR `name` LIKE 'tw' OR `name` LIKE 'Schergrat' OR `name` LIKE 'QuelDanas' OR `name` LIKE 'tw' OR `name` LIKE 'twintern';
 INSERT INTO `game_tele` (`position_x`, `position_y`, `position_z`, `orientation`, `map`, `name`)
  -- ICC Intern

@@ -1,3 +1,5 @@
+-- GaryMoveOut World Updates - 01
+
 -- Hunterpet vendor
 REPLACE INTO `creature_template` (`entry`, `modelid1`, `modelid3`, `name`, `gossip_menu_id`, `minlevel`, `faction_A`, `faction_H`, `npcflag`, `unit_class`, `ScriptName`) VALUES 
 ('100003', '25103', '25106', 'Beastmaster', '40009', '80', '35', '35', '1', '1', 'npc_hunterpetvendor');

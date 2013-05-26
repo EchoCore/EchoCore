@@ -1,14 +1,14 @@
 /*
  * DB/Instance: Fix: Trial of the Champion
- * Fixxed nearly the Event of trial of the Champion including the first Boss.
- * Uses: Uses Hack to delete the MMaps
+ * Fixed nearly the event of Trial of the Champion, including the first boss.
+ * Uses: Hack to delete the MMaps - Invisible Wall
  *
- * Bugfix der Instanz PDC NHC / HC
- * Uses Hack to delete the MMaps - Invisible Wall
+ * Bugfix der Instanz PDC, NHC / HC
  */
 
-INSERT IGNORE INTO `disables` (`sourceType`,`entry`,`flags`,`comment`) VALUES
-(7,650,0, 'Invisible Wall PDC');
+DELETE FROM `disables` WHERE sourceType = 7 AND entry = 650;
+INSERT INTO `disables` (`sourceType`,`entry`,`flags`,`comment`) VALUES
+(7,650,0, 'MMaps - Trial of the Champion');
 
 UPDATE `creature_model_info` SET `bounding_radius`=0,`combat_reach`=1,`gender`=0 WHERE `modelid`=29255; -- Colosos' Mount
 UPDATE `creature_model_info` SET `bounding_radius`=0.525,`combat_reach`=2.25,`gender`=0 WHERE `modelid`=9991; -- Jaelyne Evensong's Mount
