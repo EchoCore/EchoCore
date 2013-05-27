@@ -10,6 +10,11 @@
 #                                                                       #
 #########################################################################
 
+[30] --> DB/Quest: Fix: Not-So-Honorable Combat (Thx Kirkhammett)
+[29] --> DB/Quest: Hack: Into the Pit (Thx Vitasic)
+[28] --> DB/Quest: Fix: Frostmourne Cavern (Thx Pitcrawler).
+[27] --> Core/Handler : Fix Sharing quest (Thx BitCoding)
+[26] --> Update anticheat communication system. (Thx Torrad)
 [25] --> DB/Quest: Fix: Foolish Endeavors (Thx dr-j).
 [24] --> DB/SAI: convert EAI of some Redridge Creatures (Thx Kirkhammett).
 [23] --> DB/Quest: Fix: Standards and Practices.
