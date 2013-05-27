@@ -1,4 +1,4 @@
--- DB/Quest: Fix: Standards and Practices
+-- DB/Quest: Fix: Standards and Practices | by FireEmerald
 -- DB/Quest: Fix: Standarten
 
 SET @SpellBattleStandard := 32205; -- Place Mag'har Battle Standard

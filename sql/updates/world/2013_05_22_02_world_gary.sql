@@ -1,4 +1,4 @@
--- GaryMoveOut World Updates - 01
+-- GaryMoveOut World Updates - 01 | by Garyfisher
 
 -- Hunterpet vendor
 REPLACE INTO `creature_template` (`entry`, `modelid1`, `modelid3`, `name`, `gossip_menu_id`, `minlevel`, `faction_A`, `faction_H`, `npcflag`, `unit_class`, `ScriptName`) VALUES 

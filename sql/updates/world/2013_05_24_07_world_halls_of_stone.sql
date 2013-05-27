@@ -1,5 +1,5 @@
 /*
- * DB/Instance: Fix: Emblems of bosses, Halls of Stone.
+ * DB/Instance: Fix: Emblems of bosses, Halls of Stone | by Torrad
  * Fix all bosses in Halls of Stone.
  * Before: They droppted Emblem of Heroism.
  * Now: They drop Emblem of Triumph.

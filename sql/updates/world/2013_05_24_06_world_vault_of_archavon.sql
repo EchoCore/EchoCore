@@ -1,5 +1,5 @@
 /*
- * Instance/DB: Fix: Vault of Archavon correct Emblems
+ * Instance/DB: Fix: Vault of Archavon correct Emblems | by Torrad
  *
  * Fixes the loot of the Boss Toravon (http://wowdata.buffed.de/npc/Toravon-der-Eiswaechter-38433)
  * Error: The Boss dropped Emblem of Triumph.

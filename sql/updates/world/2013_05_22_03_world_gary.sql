@@ -1,4 +1,4 @@
--- GaryMoveOut World Updates - 02
+-- GaryMoveOut World Updates - 02 | by Garyfisher
 
 DELETE FROM `creature_text` WHERE `entry` IN (33562, 33559, 33558, 33564, 33561, 33382, 33383, 33384, 33306, 33285, 33739, 33738, 33747, 33743, 33740, 33746, 33748, 33744, 33745, 33749);
 INSERT INTO `creature_text` (`entry`, `groupid`, `id`, `text`, `type`, `language`, `probability`, `emote`, `duration`, `sound`, `comment`) VALUES 

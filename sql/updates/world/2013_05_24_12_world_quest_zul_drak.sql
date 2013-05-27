@@ -1,4 +1,4 @@
--- DB/Quest: Fix: In Search Of Answers
+-- DB/Quest: Fix: In Search Of Answers | by FireEmerald
 -- DB/Quest: Fix: Auf der Suche nach Antworten
 
 -- Activate GO for players.

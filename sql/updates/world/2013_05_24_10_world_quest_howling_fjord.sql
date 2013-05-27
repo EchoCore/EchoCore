@@ -1,4 +1,4 @@
--- DB/Quest: Hack: The Frost Wyrm and its Master
+-- DB/Quest: Hack: The Frost Wyrm and its Master | by FireEmerald
 -- DB/Quest: Hack: Der Frostwyrm und sein Meister
 
 SET @WyrmcallerVile := 24029;

@@ -1,4 +1,4 @@
--- DB/Quest: Hack: Investigate the Blue Recluse
+-- DB/Quest: Hack: Investigate the Blue Recluse | by FireEmerald
 -- DB/Quest: Hack: Untersuchungen im Blauen Eremiten
 
 SET @ENTRY = 6492;

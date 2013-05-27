@@ -1,5 +1,5 @@
 /*
- * DB/Instance: Fix: Trial of the Champion
+ * DB/Instance: Fix: Trial of the Champion | by Torrad
  * Fixed nearly the event of Trial of the Champion, including the first boss.
  * Uses: Hack to delete the MMaps - Invisible Wall
  *

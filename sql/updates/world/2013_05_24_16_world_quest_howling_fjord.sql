@@ -1,4 +1,4 @@
--- Creature_AI to Smart_AI Conversion for Proto-Drake Egg (ID 23777)
+-- Creature_AI to Smart_AI Conversion for Proto-Drake Egg (ID 23777) | by dr-j
 
 -- Delete old Creature_AI, set new one.
 DELETE FROM `creature_ai_scripts` WHERE `creature_id` = 23777;

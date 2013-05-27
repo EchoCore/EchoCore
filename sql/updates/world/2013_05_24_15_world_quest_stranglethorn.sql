@@ -1,4 +1,4 @@
--- DB/Quest: Update: Arena Grandmaster
+-- DB/Quest: Update: Arena Grandmaster | by FireEmerald
 -- DB/Quest: Update: Groﬂmeister der Arena
 
 -- Update SpecialFlags, NOT repeatable.

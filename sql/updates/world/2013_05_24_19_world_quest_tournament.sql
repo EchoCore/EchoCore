@@ -1,4 +1,4 @@
--- DB/Quest: Fix: Mistcaller Yngvar
+-- DB/Quest: Fix: Mistcaller Yngvar | by FireEmerald
 -- DB/Quest: Fix: Nebelrufer Yngvar
 
 -- Missing event script for mob spawn.

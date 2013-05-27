@@ -1,4 +1,4 @@
--- DB/Quest: Fix: Rallying the Troops
+-- DB/Quest: Fix: Rallying the Troops | by FireEmerald
 -- DB/Quest: Fix: Neue Kraft für die Truppen
 
 UPDATE `creature_template` SET `AIName` = 'SmartAI' WHERE entry = 26261;

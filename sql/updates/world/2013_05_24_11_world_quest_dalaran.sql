@@ -1,4 +1,4 @@
--- DB/Quest: Fix: A Suitable Disguise
+-- DB/Quest: Fix: A Suitable Disguise | by FireEmerald
 -- DB/Quest: Fix: Eine passende Verkleidung
 
 /* SUMMARY:
