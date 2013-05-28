@@ -332,6 +332,7 @@ void AnticheatMgr::BuildReport(Player* player,uint8 reportType)
     {
         // display warning at the center of the screen, hacky way?
         std::string str = "";
+        std::string akt = "";
         if (sWorld->getBoolConfig(CONFIG_BAN_PLAYER)) //Make anticheat active.
         {
             if (m_Players[key].GetAverage() > 0.5f)
@@ -340,7 +341,10 @@ void AnticheatMgr::BuildReport(Player* player,uint8 reportType)
 				str = "|cFFFFFFFF[|cFF0000FFAnticheat|cFFFFFFFF][|cFF0000FF" + std::string(player->GetName()) + "|cFFFFFFFF] Verdacht auf Hack!";
 				WorldPacket data(SMSG_NOTIFICATION, (str.size()+1));
 				data << str;
+				akt = "Verdacht auf Hack: " + std::string(player->GetName());
 				sWorld->SendGlobalGMMessage(&data);
+				if(m_Players[key].GetTotalReports() % 10 == 0)
+					sWorld->SendGMText(LANG_GM_BROADCAST, akt.c_str());
             }
         }
         else
@@ -349,6 +353,9 @@ void AnticheatMgr::BuildReport(Player* player,uint8 reportType)
         WorldPacket data(SMSG_NOTIFICATION, (str.size()+1));
         data << str;
         sWorld->SendGlobalGMMessage(&data);
+        akt = "Verdacht auf Hack: " + std::string(player->GetName());
+        if(m_Players[key].GetTotalReports() % 10 == 0)
+             sWorld->SendGMText(LANG_GM_BROADCAST, akt.c_str());
         }
     }
 }
