@@ -344,7 +344,7 @@ void AnticheatMgr::BuildReport(Player* player,uint8 reportType)
 				akt = "Verdacht auf Hack: " + std::string(player->GetName());
 				sWorld->SendGlobalGMMessage(&data);
 				if(m_Players[key].GetTotalReports() % 10 == 0)
-					sWorld->SendGMText(LANG_GM_BROADCAST, akt.c_str());
+                    sWorld->SendGMText(LANG_GM_BROADCAST, akt.c_str());
             }
         }
         else
@@ -355,7 +355,7 @@ void AnticheatMgr::BuildReport(Player* player,uint8 reportType)
         sWorld->SendGlobalGMMessage(&data);
         akt = "Verdacht auf Hack: " + std::string(player->GetName());
         if(m_Players[key].GetTotalReports() % 10 == 0)
-             sWorld->SendGMText(LANG_GM_BROADCAST, akt.c_str());
+            sWorld->SendGMText(LANG_GM_BROADCAST, akt.c_str());
         }
     }
 }
