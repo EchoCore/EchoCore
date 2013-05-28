@@ -10,6 +10,9 @@
 #                                                                       #
 #########################################################################
 
+[33] --> Update Halls of Reflection (Thx TrinityCore Team).
+[32] --> DB/NPC: Fix: Elite NPCs in Northend (Thx Torrad).
+[31] --> Anticheat Update. Correct notify message system. (Thx Torrad).
 [30] --> DB/Quest: Fix: Not-So-Honorable Combat (Thx Kirkhammett)
 [29] --> DB/Quest: Hack: Into the Pit (Thx Vitasic)
 [28] --> DB/Quest: Fix: Frostmourne Cavern (Thx Pitcrawler).
