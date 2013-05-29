@@ -10,6 +10,11 @@
 #                                                                       #
 #########################################################################
 
+[38] --> DB/Spell: Fix: "Raise Death" of the Death knight Class (Thx Torrad).
+[37] --> DB/Crash: Fix: Zul'Aman exploit with Amani'shi Warbringer (23580)
+[36] --> DB/Waypoints: Fix: Heartrazor, Mmmrrrggglll (Thx Malcrom, Hobbilis)
+[35] --> Delete the Headless Horseman. He should be only there at Hallow's End.
+[34] --> DB/Instance: Update: Delete all non attackable npc's in Drak'Tharon Keep
 [33] --> Update Halls of Reflection (Thx TrinityCore Team).
 [32] --> DB/NPC: Fix: Elite NPCs in Northend (Thx Torrad).
 [31] --> Anticheat Update. Correct notify message system. (Thx Torrad).
