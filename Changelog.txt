@@ -10,6 +10,8 @@
 #                                                                       #
 #########################################################################
 
+[43] --> DB/Exploit: Fix: Exp-Exploit with: NPC Azjol-Nerub / NPC Western Plaguelands.
+[42] --> DB/Exploit: Fix: Duplicate gold with buy/sell this items.
 [41] --> DB/Quest: Fix: To Catch a Thistlehead (Thx Kirkhammett & Pitcrawler)
 [40] --> DB/Misc: Fix: Prevent chat/spell flood, Prevent summon spells from overwriting.
 [39] --> Implement Arena "port-back" system, if player switches under the ground.
