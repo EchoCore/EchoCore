@@ -10,6 +10,7 @@
 #                                                                       #
 #########################################################################
 
+[41] --> DB/Quest: Fix: To Catch a Thistlehead (Thx Kirkhammett & Pitcrawler)
 [40] --> DB/Misc: Fix: Prevent chat/spell flood, Prevent summon spells from overwriting.
 [39] --> Implement Arena "port-back" system, if player switches under the ground.
 [38] --> DB/Spell: Fix: "Raise Death" of the Death knight Class (Thx Torrad).
