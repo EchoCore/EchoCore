@@ -1,4 +1,4 @@
--- DB/Misc: Fix: Prevent chat/spell flood, Prevent summon spells from overwriting.
+-- DB/Misc: Fix: Prevent chat/spell flood, Prevent summon spells from overwriting. | by FireEmerald & Kirkhammett
 
 -- Prevent chat/spell flood
 UPDATE `smart_scripts` SET `event_flags`=1 WHERE  `entryorguid`=2358 AND `source_type`=0 AND `id`=9 AND `link`=10;
