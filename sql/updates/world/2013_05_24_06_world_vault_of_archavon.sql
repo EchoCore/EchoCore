@@ -1,10 +1,12 @@
-/*
- * Instance/DB: Fix: Vault of Archavon correct Emblems | by Torrad
+/* Instance/DB: Fix: Vault of Archavon correct Emblems | by Torrad
  *
- * Fixes the loot of the Boss Toravon (http://wowdata.buffed.de/npc/Toravon-der-Eiswaechter-38433)
- * Error: The Boss dropped Emblem of Triumph.
+ * Fixes the loot of the Boss Toravon (38433)
+ * Fail: The Boss dropped Emblem of Triumph.
  * Now: The Boss dropps Emblem of Frost.
- * 
- * Fixed in: 10/25
-*/
-UPDATE creature_loot_template SET item=49426 WHERE (entry=38433 OR entry=38462) AND item=47241;
+ */
+SET @NHC10      := 38433; -- 10
+SET @NHC25      := 38462; -- 25
+SET @FROST      := 49426; -- Emblem of Frost
+SET @TRIUMPH    := 47241; -- Emblem of Triumph
+ 
+UPDATE `creature_loot_template` SET `item` = @FROST WHERE `entry` IN (@NHC10, @NHC25) AND `item` = @TRIUMPH;

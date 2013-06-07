@@ -5,7 +5,7 @@
  * Now: They drop Emblem of Triumph.
  *
  * Fixed mode: 5 Man Heroic (Non-Herioc was allready fixed)
-*/
+ */
 DELETE FROM `creature_loot_template` WHERE entry IN (27978, 27977, 27975, 31381, 31386, 31384) AND item IN (40752, 47241);
 
 INSERT IGNORE INTO `creature_loot_template` (`entry`,`item`,`ChanceOrQuestChance`,`lootmode`,`groupid`,`mincountOrRef`,`maxcount`) VALUES

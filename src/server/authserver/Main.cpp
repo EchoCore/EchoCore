@@ -105,6 +105,15 @@ extern int main(int argc, char **argv)
 
     sLog->outInfo(LOG_FILTER_AUTHSERVER, "%s (authserver)", _FULLVERSION);
     sLog->outInfo(LOG_FILTER_AUTHSERVER, "<Ctrl-C> to stop.\n");
+
+    sLog->outInfo(LOG_FILTER_AUTHSERVER, " ______     _            _____ ");
+    sLog->outInfo(LOG_FILTER_AUTHSERVER, "|  ____|   | |          / ____|");
+    sLog->outInfo(LOG_FILTER_AUTHSERVER, "| |__   ___| |__   ___ | |     ___  _ __ ___ ");
+    sLog->outInfo(LOG_FILTER_AUTHSERVER, "|  __| / __| \'_ \\ / _ \\| |    / _ \\| \'__/ _ \\");
+    sLog->outInfo(LOG_FILTER_AUTHSERVER, "| |___| (__| | | | (_) | |___| (_) | | |  __/");
+    sLog->outInfo(LOG_FILTER_AUTHSERVER, "|______\\___|_| |_|\\___/ \\_____\\___/|_|  \\___|\n");
+    sLog->outInfo(LOG_FILTER_AUTHSERVER, "https://github.com/FireEmerald/EchoCore\n");
+
     sLog->outInfo(LOG_FILTER_AUTHSERVER, "Using configuration file %s.", cfg_file);
 
     sLog->outWarn(LOG_FILTER_AUTHSERVER, "%s (Library: %s)", OPENSSL_VERSION_TEXT, SSLeay_version(SSLEAY_VERSION));

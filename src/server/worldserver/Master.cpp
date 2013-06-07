@@ -126,16 +126,13 @@ int Master::Run()
 
     sLog->outInfo(LOG_FILTER_WORLDSERVER, "%s (worldserver-daemon)", _FULLVERSION);
     sLog->outInfo(LOG_FILTER_WORLDSERVER, "<Ctrl-C> to stop.\n");
-
-    sLog->outInfo(LOG_FILTER_WORLDSERVER, " ______                       __");
-    sLog->outInfo(LOG_FILTER_WORLDSERVER, "/\\__  _\\       __          __/\\ \\__");
-    sLog->outInfo(LOG_FILTER_WORLDSERVER, "\\/_/\\ \\/ _ __ /\\_\\    ___ /\\_\\ \\, _\\  __  __");
-    sLog->outInfo(LOG_FILTER_WORLDSERVER, "   \\ \\ \\/\\`'__\\/\\ \\ /' _ `\\/\\ \\ \\ \\/ /\\ \\/\\ \\");
-    sLog->outInfo(LOG_FILTER_WORLDSERVER, "    \\ \\ \\ \\ \\/ \\ \\ \\/\\ \\/\\ \\ \\ \\ \\ \\_\\ \\ \\_\\ \\");
-    sLog->outInfo(LOG_FILTER_WORLDSERVER, "     \\ \\_\\ \\_\\  \\ \\_\\ \\_\\ \\_\\ \\_\\ \\__\\\\/`____ \\");
-    sLog->outInfo(LOG_FILTER_WORLDSERVER, "      \\/_/\\/_/   \\/_/\\/_/\\/_/\\/_/\\/__/ `/___/> \\");
-    sLog->outInfo(LOG_FILTER_WORLDSERVER, "                                 C O R E  /\\___/");
-    sLog->outInfo(LOG_FILTER_WORLDSERVER, "http://TrinityCore.org                    \\/__/\n");
+    sLog->outInfo(LOG_FILTER_WORLDSERVER, " ______     _            _____ ");
+    sLog->outInfo(LOG_FILTER_WORLDSERVER, "|  ____|   | |          / ____|");
+    sLog->outInfo(LOG_FILTER_WORLDSERVER, "| |__   ___| |__   ___ | |     ___  _ __ ___ ");
+    sLog->outInfo(LOG_FILTER_WORLDSERVER, "|  __| / __| \'_ \\ / _ \\| |    / _ \\| \'__/ _ \\");
+    sLog->outInfo(LOG_FILTER_WORLDSERVER, "| |___| (__| | | | (_) | |___| (_) | | |  __/");
+    sLog->outInfo(LOG_FILTER_WORLDSERVER, "|______\\___|_| |_|\\___/ \\_____\\___/|_|  \\___|\n");
+    sLog->outInfo(LOG_FILTER_WORLDSERVER, "https://github.com/FireEmerald/EchoCore\n");
 
     /// worldserver PID file creation
     std::string pidfile = ConfigMgr::GetStringDefault("PidFile", "");

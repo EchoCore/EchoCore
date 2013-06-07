@@ -1,12 +1,12 @@
 -- DB/Quest: Hack: The Frost Wyrm and its Master | by FireEmerald
 -- DB/Quest: Hack: Der Frostwyrm und sein Meister
 
-SET @WyrmcallerVile := 24029;
-SET @Glacion := 24019;
-SET @GOPlatform := 300161; -- TEMP The Wyrmlord's Platform
-SET @SummonSpell := 42817;
-SET @QuestA := 11238;
-SET @QuestH := 11267;
+SET @WyrmcallerVile     :=  24029;
+SET @Glacion            :=  24019;
+SET @GOPlatform         := 300161; -- TEMP The Wyrmlord's Platform
+SET @SummonSpell        :=  42817;
+SET @QuestA             :=  11238;
+SET @QuestH             :=  11267;
 
 DELETE FROM `creature` WHERE id IN (@WyrmcallerVile, @Glacion);
 INSERT INTO `creature` (`id`, `map`, `spawnMask`, `phaseMask`, `modelid`, `equipment_id`, `position_x`, `position_y`, `position_z`, `orientation`, `spawntimesecs`, `spawndist`, `currentwaypoint`, `curhealth`, `curmana`, `MovementType`, `npcflag`, `unit_flags`, `dynamicflags`) VALUES
