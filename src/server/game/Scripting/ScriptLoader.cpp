@@ -38,8 +38,6 @@ void AddSC_Mod_Multikill(); // by Codels
 void AddSC_npc_maniek();
 // NPC MMR Master
 void AddSC_npc_mmr_reset();
-// NPC Astranaar SHOP
-void AddSC_npc_shop();
 // Fast Arena Start
 void AddSC_fast_arena_start();
 // Fake Players
@@ -1353,8 +1351,6 @@ void AddCustomScripts()
     AddSC_npc_maniek();
     // NPC MMR Master
     AddSC_npc_mmr_reset();
-    // NPC Astranaar SHOP
-    AddSC_npc_shop();
     // Fast Arena Start
     AddSC_fast_arena_start();
     // Fake Players
