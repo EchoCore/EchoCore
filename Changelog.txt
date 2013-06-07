@@ -10,6 +10,7 @@
 #                                                                       #
 #########################################################################
 
+[46] --> Implement .arena commands - add new commands to the core to handle with arena teams. (Thx Bezo)
 [45] --> Correct despawn of Lord Victor Nefarius in Blackwing Lair. (Thx Torrad)
 [44] --> Correct use of bubble by Argent Confessor Paletress / Trial of the Champion. (Thx Torrad)
 [43] --> DB/Exploit: Fix: Exp-Exploit with: NPC Azjol-Nerub / NPC Western Plaguelands.
