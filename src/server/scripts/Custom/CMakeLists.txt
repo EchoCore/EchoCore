@@ -21,6 +21,7 @@ set(scripts_STAT_SRCS
   Custom/arena_fast_start.cpp
   Custom/cs_fake.cpp
   Custom/ArenaSpectate.cpp
+  Custom/top5_killers.cpp
 )
 
 message("  -> Prepared: Custom")

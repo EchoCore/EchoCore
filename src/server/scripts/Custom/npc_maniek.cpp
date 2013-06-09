@@ -35,47 +35,36 @@ public:
         uint8 PlayerKlasse = pPlayer->getClass();
         std::string kosten = (PlayerLevel <= 70) ? (PlayerLevel) + " Silver" : (PlayerLevel*10) + " Silver";
 
-        pPlayer->ADD_GOSSIP_ITEM( 10, "Teleports:", GOSSIP_SENDER_MAIN, 6111);
+        pPlayer->ADD_GOSSIP_ITEM( 10, "Teleporiere:", GOSSIP_SENDER_MAIN, 6111);
 
-        if (ALLIANCE == pPlayer->GetTeam())
-        {
-            pPlayer->ADD_GOSSIP_ITEM( 5, "Teleport to Stormwind", GOSSIP_SENDER_MAIN, 6201);
-            pPlayer->ADD_GOSSIP_ITEM( 5, "Teleport to Ironforge", GOSSIP_SENDER_MAIN, 6202);
-            pPlayer->ADD_GOSSIP_ITEM( 5, "Teleport to Darnassus", GOSSIP_SENDER_MAIN, 6203);
-            pPlayer->ADD_GOSSIP_ITEM( 5, "Teleport to Exodar", GOSSIP_SENDER_MAIN, 6204);
-            if (PlayerLevel>=68)
-                pPlayer->ADD_GOSSIP_ITEM( 5, "Teleport to Northrend", GOSSIP_SENDER_MAIN, 6267);
-        }
-        else
-        {
-            pPlayer->ADD_GOSSIP_ITEM( 5, "Teleport to Orgrimmar", GOSSIP_SENDER_MAIN, 6211);
-            pPlayer->ADD_GOSSIP_ITEM( 5, "Teleport to Thunder Bluff", GOSSIP_SENDER_MAIN, 6212);
-            pPlayer->ADD_GOSSIP_ITEM( 5, "Teleport to Undercity", GOSSIP_SENDER_MAIN, 6213);
-            pPlayer->ADD_GOSSIP_ITEM( 5, "Teleport to Silvermoon City", GOSSIP_SENDER_MAIN, 6214);
-            if (PlayerLevel>=68)
-                pPlayer->ADD_GOSSIP_ITEM( 5, "Teleport to Northrend", GOSSIP_SENDER_MAIN, 6268);
-        }
+        pPlayer->ADD_GOSSIP_ITEM( 5, "Teleportiere nach Sturmwind", GOSSIP_SENDER_MAIN, 6201);
+        pPlayer->ADD_GOSSIP_ITEM( 5, "Teleportiere nach Eisenschmiede", GOSSIP_SENDER_MAIN, 6202);
+        pPlayer->ADD_GOSSIP_ITEM( 5, "Teleportiere nach Darnassus", GOSSIP_SENDER_MAIN, 6203);
+        pPlayer->ADD_GOSSIP_ITEM( 5, "Teleportiere nach Exodar", GOSSIP_SENDER_MAIN, 6204);
+        if (PlayerLevel>=68)
+            pPlayer->ADD_GOSSIP_ITEM( 5, "Teleportiere nach Nordend", GOSSIP_SENDER_MAIN, 6267);
 
-        if (pPlayer->getClass()==6)
-        {
-            pPlayer->ADD_GOSSIP_ITEM( 5, "Teleport to Acherus The Ebon Hold", GOSSIP_SENDER_MAIN, 6207);
-        }
-
-        pPlayer->ADD_GOSSIP_ITEM( 5, "Teleport to Astranaar", GOSSIP_SENDER_MAIN, 6266);
-        pPlayer->ADD_GOSSIP_ITEM( 5, "Teleport to StairCase Event", GOSSIP_SENDER_MAIN, 6270);
+        pPlayer->ADD_GOSSIP_ITEM( 5, "Teleportiere nach Orgrimmar", GOSSIP_SENDER_MAIN, 6211);
+        pPlayer->ADD_GOSSIP_ITEM( 5, "Teleportiere nach Donnerfels", GOSSIP_SENDER_MAIN, 6212);
+        pPlayer->ADD_GOSSIP_ITEM( 5, "Teleportiere nach Unterstadt", GOSSIP_SENDER_MAIN, 6213);
+        pPlayer->ADD_GOSSIP_ITEM( 5, "Teleportiere nach Silbermond", GOSSIP_SENDER_MAIN, 6214);
+        if (PlayerLevel>=68)
+            pPlayer->ADD_GOSSIP_ITEM( 5, "Teleportiere nach Nordend", GOSSIP_SENDER_MAIN, 6268);
+       
+        pPlayer->ADD_GOSSIP_ITEM( 5, "Teleportiere in Archerus Festung", GOSSIP_SENDER_MAIN, 6207);
 
         if (PlayerLevel>=30)
-            pPlayer->ADD_GOSSIP_ITEM( 5, "Teleport to Gurubashi Arena", GOSSIP_SENDER_MAIN, 6200);
-            pPlayer->ADD_GOSSIP_ITEM( 5, "Teleport to Gadgetzan", GOSSIP_SENDER_MAIN, 6269);
+            pPlayer->ADD_GOSSIP_ITEM( 5, "Teleportiere in die Gurubashi Arena", GOSSIP_SENDER_MAIN, 6200);
+            pPlayer->ADD_GOSSIP_ITEM( 5, "Teleportiere nach Gadgetzan", GOSSIP_SENDER_MAIN, 6269);
 
         if (PlayerLevel>=58)
-            pPlayer->ADD_GOSSIP_ITEM( 5, "Teleport to Shattrath", GOSSIP_SENDER_MAIN, 6208);
+            pPlayer->ADD_GOSSIP_ITEM( 5, "Teleportiere nach Shattrath", GOSSIP_SENDER_MAIN, 6208);
 
         if (PlayerLevel>=65)
-            pPlayer->ADD_GOSSIP_ITEM( 5, "Teleport to Isle of Quel'Danas", GOSSIP_SENDER_MAIN, 6209);
+            pPlayer->ADD_GOSSIP_ITEM( 5, "Teleportiere nach Insel von Quel Danas", GOSSIP_SENDER_MAIN, 6209);
 
         if (PlayerLevel>=70)
-            pPlayer->ADD_GOSSIP_ITEM( 5, "Teleport to Dalaran", GOSSIP_SENDER_MAIN, 6210);
+            pPlayer->ADD_GOSSIP_ITEM( 5, "Teleportiere nach Dalaran", GOSSIP_SENDER_MAIN, 6210);
 
         pPlayer->PlayerTalkClass->SendGossipMenu(2713, pCreature->GetGUID());
         return true;
@@ -120,14 +109,11 @@ public:
     void custom_porter_port(uint32 a, float b, float c, float d, float e, Player* pPlayer, Creature* pCreature)
     {
         char* temp = "";
-        switch (urand(1,7)) {
-            case 1: temp = "Have a pleasant journey!"; break;
-            case 2: temp = "And again... happy customer..."; break;
-            case 3: temp = "An excellent choice!"; break;
-            case 4: temp = "Faster than the speed of light!"; break;
-            case 5: temp = "Would You recommend us?"; break;
-            case 6: temp = "Player? WHAT ARE YOU DOIN'?! STHAP!"; break;
-            case 7: temp = "Connection lost......."; break;
+        switch (urand(1,4)) {
+            case 1: temp = "Viel Spass bei der Reise!"; break;
+            case 2: temp = "Sehr gute Wahl!"; break;
+            case 3: temp = "Schneller als das Licht!"; break;
+            case 4: temp = "Bye Bye"; break;
         }
         char const* text = temp;
 

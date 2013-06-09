@@ -44,6 +44,8 @@ void AddSC_fast_arena_start();
 void AddSC_fake_commandscript();
 // Arena Spectator
 void AddSC_arena_spectator_script();
+// TOP 5 Killers
+void AddSC_top5_killers();
 
 // spells
 void AddSC_deathknight_spell_scripts();
@@ -1359,5 +1361,7 @@ void AddCustomScripts()
     AddSC_fake_commandscript();
     // Arena Spectator
     AddSC_arena_spectator_script();
+    // Top 5 Killers
+    AddSC_top5_killers();
 #endif
 }
