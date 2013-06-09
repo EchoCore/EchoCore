@@ -22,6 +22,7 @@ set(scripts_STAT_SRCS
   Custom/cs_fake.cpp
   Custom/ArenaSpectate.cpp
   Custom/top5_killers.cpp
+  Custom/top5_arenateams.cpp
 )
 
 message("  -> Prepared: Custom")

@@ -17,7 +17,7 @@ using namespace std;
 /* Basic Menu */
 #define Menu_Whisp     "Information"
 #define Notification   "5 Besten PvP Spieler"
-#define M_Whisper      "Die 5 besten PvP-Spieler der jeweiligen Klasse werden hier aufgelistet. Gewertet wird das Ranking nach der Anzahl an Todesstößen, die ein Spieler gemacht hat."
+#define M_Whisper      "Die 5 besten PvP-Spieler der jeweiligen Klasse werden hier aufgelistet. Gewertet wird das Ranking nach der Anzahl an ehrenhaften Siegen, die ein Spieler gemacht hat."
 #define leave          "Bye"
 
 /* Class E_Menu */
@@ -110,7 +110,7 @@ class top5_killers : public CreatureScript
                             string name = fields[0].GetString();
                             uint32 totalKills = fields[1].GetUInt32();
                             char msg[250];
-                            snprintf(msg, 250, "Name: %s, Kills: %u", name.c_str(), totalKills);
+                            snprintf(msg, 250, "Name: %s, Ehrenhafte Siege: %u", name.c_str(), totalKills);
                             ChatHandler(player->GetSession()).PSendSysMessage(msg);
                         }
                         while(result->NextRow());
@@ -133,7 +133,7 @@ class top5_killers : public CreatureScript
                             string name = fields[0].GetString();
                             uint32 totalKills = fields[1].GetUInt32();
                             char msg[250];
-                            snprintf(msg, 250, "Name: %s, Kills: %u", name.c_str(), totalKills);
+                            snprintf(msg, 250, "Name: %s, Ehrenhafte Siege: %u", name.c_str(), totalKills);
                             ChatHandler(player->GetSession()).PSendSysMessage(msg);
                         }
                         while(result->NextRow());
@@ -156,7 +156,7 @@ class top5_killers : public CreatureScript
                             string name = fields[0].GetString();
                             uint32 totalKills = fields[1].GetUInt32();
                             char msg[250];
-                            snprintf(msg, 250, "Name: %s, Kills: %u", name.c_str(), totalKills);
+                            snprintf(msg, 250, "Name: %s, Ehrenhafte Siege: %u", name.c_str(), totalKills);
                             ChatHandler(player->GetSession()).PSendSysMessage(msg);
                         }
                         while(result->NextRow());
@@ -179,7 +179,7 @@ class top5_killers : public CreatureScript
                             string name = fields[0].GetString();
                             uint32 totalKills = fields[1].GetUInt32();
                             char msg[250];
-                            snprintf(msg, 250, "Name: %s, Kills: %u", name.c_str(), totalKills);
+                            snprintf(msg, 250, "Name: %s, Ehrenhafte Siege: %u", name.c_str(), totalKills);
                             ChatHandler(player->GetSession()).PSendSysMessage(msg);
                         }
                         while(result->NextRow());
@@ -202,7 +202,7 @@ class top5_killers : public CreatureScript
                             string name = fields[0].GetString();
                             uint32 totalKills = fields[1].GetUInt32();
                             char msg[250];
-                            snprintf(msg, 250, "Name: %s, Kills: %u", name.c_str(), totalKills);
+                            snprintf(msg, 250, "Name: %s, Ehrenhafte Siege: %u", name.c_str(), totalKills);
                             ChatHandler(player->GetSession()).PSendSysMessage(msg);
                         }
                         while(result->NextRow());
@@ -225,7 +225,7 @@ class top5_killers : public CreatureScript
                             string name = fields[0].GetString();
                             uint32 totalKills = fields[1].GetUInt32();
                             char msg[250];
-                            snprintf(msg, 250, "Name: %s, Kills: %u", name.c_str(), totalKills);
+                            snprintf(msg, 250, "Name: %s, Ehrenhafte Siege: %u", name.c_str(), totalKills);
                             ChatHandler(player->GetSession()).PSendSysMessage(msg);
                         }
                         while(result->NextRow());
@@ -248,7 +248,7 @@ class top5_killers : public CreatureScript
                             string name = fields[0].GetString();
                             uint32 totalKills = fields[1].GetUInt32();
                             char msg[250];
-                            snprintf(msg, 250, "Name: %s, Kills: %u", name.c_str(), totalKills);
+                            snprintf(msg, 250, "Name: %s, Ehrenhafte Siege: %u", name.c_str(), totalKills);
                             ChatHandler(player->GetSession()).PSendSysMessage(msg);
                         }
                         while(result->NextRow());
@@ -271,7 +271,7 @@ class top5_killers : public CreatureScript
                             string name = fields[0].GetString();
                             uint32 totalKills = fields[1].GetUInt32();
                             char msg[250];
-                            snprintf(msg, 250, "Name: %s, Kills: %u", name.c_str(), totalKills);
+                            snprintf(msg, 250, "Name: %s, Ehrenhafte Siege: %u", name.c_str(), totalKills);
                             ChatHandler(player->GetSession()).PSendSysMessage(msg);
                         }
                         while(result->NextRow());
@@ -294,7 +294,7 @@ class top5_killers : public CreatureScript
                             string name = fields[0].GetString();
                             uint32 totalKills = fields[1].GetUInt32();
                             char msg[250];
-                            snprintf(msg, 250, "Name: %s, Kills: %u", name.c_str(), totalKills);
+                            snprintf(msg, 250, "Name: %s, Ehrenhafte Siege: %u", name.c_str(), totalKills);
                             ChatHandler(player->GetSession()).PSendSysMessage(msg);
                         }
                         while(result->NextRow());
@@ -317,7 +317,7 @@ class top5_killers : public CreatureScript
                             string name = fields[0].GetString();
                             uint32 totalKills = fields[1].GetUInt32();
                             char msg[250];
-                            snprintf(msg, 250, "Name: %s, Kills: %u", name.c_str(), totalKills);
+                            snprintf(msg, 250, "Name: %s, Ehrenhafte Siege: %u", name.c_str(), totalKills);
                             ChatHandler(player->GetSession()).PSendSysMessage(msg);
                         }
                         while(result->NextRow());
