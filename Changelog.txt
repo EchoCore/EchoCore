@@ -10,6 +10,7 @@
 #                                                                       #
 #########################################################################
 
+[57] --> DB/Quest: Fix: Second Chances (12847) (Thx Pitcrawler)
 [56] --> DB/Quest: Fix: Convocation at Zol'Heb (12730) (Thx Pitcrawler)
 [55] --> DB/Quest: Fix: Badlands Reagent Run II (2203) (Thx Pitcrawler, joschiwald and Kirkhammett)
 [54] --> DB/Quest: Fix: A Blade Fit For A Champion (Daily, 13741) (Thx malcrom and Aokromes)
