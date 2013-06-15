@@ -401,6 +401,10 @@ void WorldSession::HandleMovementOpcodes(WorldPacket& recvData)
              case 571: underMapValueZ = -400.0f; break; // Northrend
              default: underMapValueZ = -500.0f; break;
         }
+
+        if (plrMover->GetMapId() == 617 && movementInfo.pos.GetPositionZ() < 3.0) // Dalaran Arena 
+            plrMover->TeleportTo(617, 13313.605f, 813.23f, 7.11f, 5.1f); 
+
         if (movementInfo.pos.GetPositionZ() < -500.0f)
         {
             if (underMapValueZ != -500) // Only Case Values
