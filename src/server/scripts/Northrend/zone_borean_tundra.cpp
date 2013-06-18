@@ -812,7 +812,10 @@ public:
 
     struct npc_nexus_drake_hatchlingAI : public FollowerAI //The spell who makes the npc follow the player is missing, also we can use FollowerAI!
     {
-        npc_nexus_drake_hatchlingAI(Creature* creature) : FollowerAI(creature) {}
+        npc_nexus_drake_hatchlingAI(Creature* creature) : FollowerAI(creature)
+        {
+            HarpoonerGUID = 0;
+        }
 
         uint64 HarpoonerGUID;
         bool WithRedDragonBlood;
@@ -820,7 +823,6 @@ public:
         void Reset()
         {
            WithRedDragonBlood = false;
-           HarpoonerGUID = 0;
         }
 
         void EnterCombat(Unit* who)
@@ -877,6 +879,12 @@ public:
                     me->AttackStop();
                     WithRedDragonBlood = false;
                 }
+            }
+
+            if ((me->getFaction() == 35) && (!me->HasAura(SPELL_SUBDUED)))
+            {
+                HarpoonerGUID = 0;
+                me->DisappearAndDie();
             }
 
             if (!UpdateVictim())
