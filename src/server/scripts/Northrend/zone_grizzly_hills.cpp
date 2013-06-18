@@ -704,6 +704,7 @@ enum LakeFrog
     SPELL_WARTS                            = 62581,
     SPELL_MAIDEN_OF_ASHWOOD_LAKE_TRANSFORM = 62550,
     SPELL_SUMMON_ASHWOOD_BRAND             = 62554,
+    SPELL_FROG_KISS                        = 62536,
 
     // Items
     ITEM_WARTS_B_GONE_LIP_BALM             = 44986,
@@ -794,7 +795,7 @@ class npc_lake_frog : public CreatureScript
                         player->AddAura(SPELL_WARTS, player);
                     else
                     {
-                        player->RemoveAura(SPELL_WARTSBGONE_LIP_BALM);
+                        DoCast(player, SPELL_FROG_KISS); // Removes SPELL_WARTSBGONE_LIP_BALM
 
                         if (me->GetEntry() == NPC_LAKE_FROG)
                         {
