@@ -10,6 +10,8 @@
 #                                                                       #
 #########################################################################
 
+[59] --> DB/CPP/Quest: Fix: Troll Patrol: The Alchemist's Apprentice (12541) and Lab Work (12557) (Thx malcrom)
+          - Add german text translation for Alchemist Finklestein (28205)
 [58] --> DB/CPP/Instance: Update: Halls Of Reflection (Thx Torrad)
 [57] --> DB/Quest: Fix: Second Chances (12847) (Thx Pitcrawler)
 [56] --> DB/Quest: Fix: Convocation at Zol'Heb (12730) (Thx Pitcrawler)
