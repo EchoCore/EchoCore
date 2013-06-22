@@ -10,6 +10,11 @@
 #                                                                       #
 #########################################################################
 
+[60] --> DB/Quests: Amphitheater of Anguish in Zul'Drak (Thx malcrom)
+          - DB/Gossip: Add: Missing gossip for Gurgthock
+          - DB/Creature: Add: Missing spawns for Amphitheater of Anguish
+          - DB/Creature: Add: Missing text for Amphitheater Vendor
+          - DB/Waypoints: Add: Waypoints for two Amphitheater Vendors (30098)
 [59] --> DB/CPP/Quest: Fix: Troll Patrol: The Alchemist's Apprentice (12541) and Lab Work (12557) (Thx malcrom)
           - Add german text translation for Alchemist Finklestein (28205)
 [58] --> DB/CPP/Instance: Update: Halls Of Reflection (Thx Torrad)
@@ -78,6 +83,7 @@
 #            https://github.com/garyfisher                              #
 #            https://github.com/Torrad                                  #
 #            https://github.com/Pitcrawler                              #
+#            https://github.com/malcrom                                 #
 #            https://github.com/Kirkhammett                             #
 #            https://github.com/dr-j                                    #
 #                                                                       #
