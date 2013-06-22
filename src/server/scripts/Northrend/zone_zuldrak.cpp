@@ -2047,8 +2047,8 @@ class spell_fetch_ingredient_aura : public SpellScriptLoader
             void OnRemove(AuraEffect const* /*aurEff*/, AuraEffectHandleModes /*mode*/)
             {
                 Unit* target = GetTarget();
-                if (target->HasAura(SPELL_ALCHEMIST_APPRENTICE_INVISBUFF))
-                    if (Unit* target = GetTarget())
+                if (GetTargetApplication()->GetRemoveMode() == AURA_REMOVE_BY_EXPIRE)
+                    if (target->HasAura(SPELL_ALCHEMIST_APPRENTICE_INVISBUFF))
                         if (Creature* finklestein = GetClosestCreatureWithEntry(target, NPC_FINKLESTEIN, 100.0f))
                         {
                             target->RemoveAura(SPELL_ALCHEMIST_APPRENTICE_INVISBUFF);
