@@ -293,7 +293,7 @@ public:
                 break;
         }
         player->CLOSE_GOSSIP_MENU();
-        ai->SetDespawnAtFar(false);
+        ai->SetDespawnAtFar(true);
         creature->RemoveFlag(UNIT_NPC_FLAGS, UNIT_NPC_FLAG_GOSSIP);
         return true;
     }
@@ -1069,7 +1069,7 @@ public:
                         case 72:
                         case 74:
                         case 76:
-                            if (me->isInCombat())
+                            if (me->IsInCombat())
                                 phaseTimer = 1000;
                             else
                             {
@@ -1078,12 +1078,12 @@ public:
                                 if (step == 76) Talk(SAY_PHASE310);
                                 SetHoldState(false);
                                 bStepping = false;
-                                SetRun(false);
+                                SetRun(true);
                                 JumpToNextStep(2000);
                             }
                             break;
                         case 78:
-                            if (me->isInCombat())
+                            if (me->IsInCombat())
                                 phaseTimer = 1000;
                             else
                             {
@@ -1214,7 +1214,7 @@ public:
             }
 
             //Battling skills
-            if (!me->getVictim())
+            if (!me->GetVictim())
                 return;
 
             if (exorcismTimer < diff)

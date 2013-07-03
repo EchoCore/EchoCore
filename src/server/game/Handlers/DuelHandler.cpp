@@ -41,53 +41,13 @@ void WorldSession::HandleDuelAcceptedOpcode(WorldPacket& recvPacket)
     if (player == player->duel->initiator || !plTarget || player == plTarget || player->duel->startTime != 0 || plTarget->duel->startTime != 0)
         return;
 
-    //sLog->outDebug(LOG_FILTER_PACKETIO, "WORLD: Received CMSG_DUEL_ACCEPTED");
-    sLog->outDebug(LOG_FILTER_NETWORKIO, "Player 1 is: %u (%s)", player->GetGUIDLow(), player->GetName().c_str());
-    sLog->outDebug(LOG_FILTER_NETWORKIO, "Player 2 is: %u (%s)", plTarget->GetGUIDLow(), plTarget->GetName().c_str());
+    //TC_LOG_DEBUG(LOG_FILTER_PACKETIO, "WORLD: Received CMSG_DUEL_ACCEPTED");
+    TC_LOG_DEBUG(LOG_FILTER_NETWORKIO, "Player 1 is: %u (%s)", player->GetGUIDLow(), player->GetName().c_str());
+    TC_LOG_DEBUG(LOG_FILTER_NETWORKIO, "Player 2 is: %u (%s)", plTarget->GetGUIDLow(), plTarget->GetName().c_str());
 
     time_t now = time(NULL);
     player->duel->startTimer = now;
     plTarget->duel->startTimer = now;
-
-    // Reset Duel Cooldowns, Hp, Mana, Rage and Runic Power.
-    //                         Elwynn Forest                Durotar                      Circle of Wills                Astranaar          
-    if (player->GetAreaId() == 12 || player->GetAreaId() == 14 || player->GetAreaId() == 4570 || player->GetAreaId() == 415)
-    {
-        player->SetHealth(player->GetMaxHealth());
-        plTarget->SetHealth(plTarget->GetMaxHealth());
-        player->RemoveArenaSpellCooldowns(true);
-        plTarget->RemoveArenaSpellCooldowns(true);
-
-        // Debuffs
-        player->RemoveAura(57723);
-        player->RemoveAura(57724);
-        player->RemoveAura(25771);
-        player->RemoveAura(41425);
-        player->RemoveAura(61987);
-        player->RemoveAura(66233);
-        player->RemoveAura(11196);
-        plTarget->RemoveAura(57723);
-        plTarget->RemoveAura(57724);
-        plTarget->RemoveAura(25771);
-        plTarget->RemoveAura(41425);
-        plTarget->RemoveAura(61987);
-        plTarget->RemoveAura(66233);
-        plTarget->RemoveAura(11196);
-
-        if (player->getPowerType() == POWER_MANA)
-            player->SetPower(POWER_MANA, player->GetMaxPower(POWER_MANA));
-        if (plTarget->getPowerType() == POWER_MANA)
-            plTarget->SetPower(POWER_MANA, plTarget->GetMaxPower(POWER_MANA));
-    }
-
-    if (player->getPowerType() == POWER_RAGE)
-        player->SetPower(POWER_RAGE, 0);
-    if (plTarget->getPowerType() == POWER_RAGE)
-        plTarget->SetPower(POWER_RAGE, 0);
-    if (player->getPowerType() == POWER_RUNIC_POWER)
-        player->SetPower(POWER_RUNIC_POWER, 0);
-    if (plTarget->getPowerType() == POWER_RUNIC_POWER)
-        plTarget->SetPower(POWER_RUNIC_POWER, 0);
 
     player->SendDuelCountdown(3000);
     plTarget->SendDuelCountdown(3000);
@@ -95,7 +55,7 @@ void WorldSession::HandleDuelAcceptedOpcode(WorldPacket& recvPacket)
 
 void WorldSession::HandleDuelCancelledOpcode(WorldPacket& recvPacket)
 {
-    sLog->outDebug(LOG_FILTER_NETWORKIO, "WORLD: Received CMSG_DUEL_CANCELLED");
+    TC_LOG_DEBUG(LOG_FILTER_NETWORKIO, "WORLD: Received CMSG_DUEL_CANCELLED");
     uint64 guid;
     recvPacket >> guid;
 

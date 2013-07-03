@@ -73,10 +73,10 @@ _flags(AFLAG_NONE), _effectsToApply(effMask), _needClientUpdate(false)
             _slot = slot;
             GetTarget()->SetVisibleAura(slot, this);
             SetNeedClientUpdate();
-            sLog->outDebug(LOG_FILTER_SPELLS_AURAS, "Aura: %u Effect: %d put to unit visible auras slot: %u", GetBase()->GetId(), GetEffectMask(), slot);
+            TC_LOG_DEBUG(LOG_FILTER_SPELLS_AURAS, "Aura: %u Effect: %d put to unit visible auras slot: %u", GetBase()->GetId(), GetEffectMask(), slot);
         }
         else
-            sLog->outDebug(LOG_FILTER_SPELLS_AURAS, "Aura: %u Effect: %d could not find empty unit visible slot", GetBase()->GetId(), GetEffectMask());
+            TC_LOG_DEBUG(LOG_FILTER_SPELLS_AURAS, "Aura: %u Effect: %d could not find empty unit visible slot", GetBase()->GetId(), GetEffectMask());
     }
 
     _InitFlags(caster, effMask);
@@ -155,7 +155,7 @@ void AuraApplication::_HandleEffect(uint8 effIndex, bool apply)
     ASSERT(aurEff);
     ASSERT(HasEffect(effIndex) == (!apply));
     ASSERT((1<<effIndex) & _effectsToApply);
-    sLog->outDebug(LOG_FILTER_SPELLS_AURAS, "AuraApplication::_HandleEffect: %u, apply: %u: amount: %u", aurEff->GetAuraType(), apply, aurEff->GetAmount());
+    TC_LOG_DEBUG(LOG_FILTER_SPELLS_AURAS, "AuraApplication::_HandleEffect: %u, apply: %u: amount: %u", aurEff->GetAuraType(), apply, aurEff->GetAmount());
 
     if (apply)
     {
@@ -340,14 +340,6 @@ m_isRemoved(false), m_isSingleTarget(false), m_isUsingCharges(false)
     if (m_spellInfo->ManaPerSecond || m_spellInfo->ManaPerSecondPerLevel)
         m_timeCla = 1 * IN_MILLISECONDS;
 
-    switch (m_spellInfo->Id)
-    {
-        // some auras should have max stacks at applying
-        case 53257:                                         // Cobra Strikes
-            m_stackAmount = spellproto->StackAmount;
-            break;
-    }
-
     m_maxDuration = CalcMaxDuration(caster);
     m_duration = m_maxDuration;
     m_procCharges = CalcMaxCharges(caster);
@@ -432,7 +424,7 @@ void Aura::_UnapplyForTarget(Unit* target, Unit* caster, AuraApplication * auraA
     /// @todo Figure out why this happens
     if (itr == m_applications.end())
     {
-        sLog->outError(LOG_FILTER_SPELLS_AURAS, "Aura::_UnapplyForTarget, target:%u, caster:%u, spell:%u was not found in owners application map!",
+        TC_LOG_ERROR(LOG_FILTER_SPELLS_AURAS, "Aura::_UnapplyForTarget, target:%u, caster:%u, spell:%u was not found in owners application map!",
         target->GetGUIDLow(), caster ? caster->GetGUIDLow() : 0, auraApp->GetBase()->GetSpellInfo()->Id);
         ASSERT(false);
     }
@@ -543,7 +535,7 @@ void Aura::UpdateTargetMap(Unit* caster, bool apply)
             // persistent area aura does not hit flying targets
             if (GetType() == DYNOBJ_AURA_TYPE)
             {
-                if (itr->first->isInFlight())
+                if (itr->first->IsInFlight())
                     addUnit = false;
             }
             // unit auras can not stack with each other
@@ -574,7 +566,7 @@ void Aura::UpdateTargetMap(Unit* caster, bool apply)
             if (!GetOwner()->IsSelfOrInSameMap(itr->first))
             {
                 /// @todo There is a crash caused by shadowfiend load addon
-                sLog->outFatal(LOG_FILTER_SPELLS_AURAS, "Aura %u: Owner %s (map %u) is not in the same map as target %s (map %u).", GetSpellInfo()->Id,
+                TC_LOG_FATAL(LOG_FILTER_SPELLS_AURAS, "Aura %u: Owner %s (map %u) is not in the same map as target %s (map %u).", GetSpellInfo()->Id,
                     GetOwner()->GetName().c_str(), GetOwner()->IsInWorld() ? GetOwner()->GetMap()->GetId() : uint32(-1),
                     itr->first->GetName().c_str(), itr->first->IsInWorld() ? itr->first->GetMap()->GetId() : uint32(-1));
                 ASSERT(false);
@@ -945,6 +937,31 @@ bool Aura::CanBeSentToClient() const
     return !IsPassive() || GetSpellInfo()->HasAreaAuraEffect() || HasEffectType(SPELL_AURA_ABILITY_IGNORE_AURASTATE);
 }
 
+bool Aura::IsSingleTargetWith(Aura const* aura) const
+{
+    // Same spell?
+    if (GetSpellInfo()->IsRankOf(aura->GetSpellInfo()))
+        return true;
+
+    SpellSpecificType spec = GetSpellInfo()->GetSpellSpecific();
+    // spell with single target specific types
+    switch (spec)
+    {
+        case SPELL_SPECIFIC_JUDGEMENT:
+        case SPELL_SPECIFIC_MAGE_POLYMORPH:
+            if (aura->GetSpellInfo()->GetSpellSpecific() == spec)
+                return true;
+            break;
+        default:
+            break;
+    }
+
+    if (HasEffectType(SPELL_AURA_CONTROL_VEHICLE) && aura->HasEffectType(SPELL_AURA_CONTROL_VEHICLE))
+        return true;
+
+    return false;
+}
+
 void Aura::UnregisterSingleTarget()
 {
     ASSERT(m_isSingleTarget);
@@ -1201,7 +1218,7 @@ void Aura::HandleAuraSpecificMods(AuraApplication const* aurApp, Unit* caster, b
                                 case 31571: spellId = 57529; break;
                                 case 31572: spellId = 57531; break;
                                 default:
-                                    sLog->outError(LOG_FILTER_SPELLS_AURAS, "Aura::HandleAuraSpecificMods: Unknown rank of Arcane Potency (%d) found", aurEff->GetId());
+                                    TC_LOG_ERROR(LOG_FILTER_SPELLS_AURAS, "Aura::HandleAuraSpecificMods: Unknown rank of Arcane Potency (%d) found", aurEff->GetId());
                             }
                             if (spellId)
                                 caster->CastSpell(caster, spellId, true);
@@ -1297,7 +1314,7 @@ void Aura::HandleAuraSpecificMods(AuraApplication const* aurApp, Unit* caster, b
                             case 49631: spellId = 50509; break;
                             case 49032: spellId = 50508; break;
                             default:
-                                sLog->outError(LOG_FILTER_SPELLS_AURAS, "Aura::HandleAuraSpecificMods: Unknown rank of Crypt Fever/Ebon Plague (%d) found", aurEff->GetId());
+                                TC_LOG_ERROR(LOG_FILTER_SPELLS_AURAS, "Aura::HandleAuraSpecificMods: Unknown rank of Crypt Fever/Ebon Plague (%d) found", aurEff->GetId());
                         }
                         caster->CastSpell(target, spellId, true, 0, GetEffect(0));
                     }
@@ -1404,7 +1421,7 @@ void Aura::HandleAuraSpecificMods(AuraApplication const* aurApp, Unit* caster, b
                             case 53759: spellId = 60947; break;
                             case 53754: spellId = 60946; break;
                             default:
-                                sLog->outError(LOG_FILTER_SPELLS_AURAS, "Aura::HandleAuraSpecificMods: Unknown rank of Improved Fear (%d) found", aurEff->GetId());
+                                TC_LOG_ERROR(LOG_FILTER_SPELLS_AURAS, "Aura::HandleAuraSpecificMods: Unknown rank of Improved Fear (%d) found", aurEff->GetId());
                         }
                         if (spellId)
                             caster->CastSpell(target, spellId, true);
@@ -1440,7 +1457,7 @@ void Aura::HandleAuraSpecificMods(AuraApplication const* aurApp, Unit* caster, b
                                 if (caster->ToPlayer()->GetSpellCooldownDelay(aura->GetId()) <= 11)
                                     break;
                             }
-                            else // and add if needed
+                            else    // and add if needed
                                 caster->ToPlayer()->AddSpellCooldown(aura->GetId(), 0, uint32(time(NULL) + 12));
                         }
 
@@ -1471,7 +1488,7 @@ void Aura::HandleAuraSpecificMods(AuraApplication const* aurApp, Unit* caster, b
                                     caster->CastCustomSpell(target, 63654, &basepoints0, NULL, NULL, true);
                                     break;
                                 }
-                                case POWER_RAGE: triggeredSpellId = 63653; break;
+                                case POWER_RAGE:   triggeredSpellId = 63653; break;
                                 case POWER_ENERGY: triggeredSpellId = 63655; break;
                                 case POWER_RUNIC_POWER: triggeredSpellId = 63652; break;
                                 default:
@@ -1605,34 +1622,21 @@ void Aura::HandleAuraSpecificMods(AuraApplication const* aurApp, Unit* caster, b
             }
             break;
         case SPELLFAMILY_PALADIN:
-            // retribution aura works fine by default, dont do anything to it
-            if (GetSpellInfo()->GetSpellSpecific() == SPELL_SPECIFIC_AURA && GetSpellInfo()->SpellIconID != 555)
-            {
-                // search for Swift and Sanctified Retribution
-                float hasteBonus = 0;
-                Unit::AuraEffectList const& TalentAuras = caster->GetAuraEffectsByType(SPELL_AURA_ADD_FLAT_MODIFIER);
-                for (Unit::AuraEffectList::const_iterator itr = TalentAuras.begin(); itr != TalentAuras.end(); ++itr)
-                {
-                    if ((*itr)->GetSpellInfo()->SpellIconID == 3028)
-                        hasteBonus = ((*itr)->GetSpellInfo()->Effects[0].CalcValue(target));
-                    // add melee dmg bonus of Sanctified Retribution to the paladin
-                    if ((*itr)->GetSpellInfo()->Id == 31869)
-                        ((*itr)->HandleModDamagePercentDone(aurApp, AURA_EFFECT_HANDLE_REAL, apply));
-                }
-
-                // make Swift retribution apply its buffs on every paladin aura
-                if (hasteBonus)
-                {
-                    target->ApplyCastTimePercentMod(hasteBonus, apply);
-                    target->ApplyAttackTimePercentMod(BASE_ATTACK, hasteBonus, apply);
-                    target->ApplyAttackTimePercentMod(OFF_ATTACK, hasteBonus, apply);
-                    target->ApplyAttackTimePercentMod(RANGED_ATTACK, hasteBonus, apply);
-                }
-            }
-
             switch (GetId())
             {
                 case 19746:
+                    if (!caster)
+                        break;
+
+                    // Improved concentration aura - linked aura
+                    if (caster->HasAura(20254) || caster->HasAura(20255) || caster->HasAura(20256))
+                    {
+                        if (apply)
+                            target->CastSpell(target, 63510, true);
+                        else
+                            target->RemoveAura(63510);
+                    }
+                    break;
                 case 31821:
                     // Aura Mastery Triggered Spell Handler
                     // If apply Concentration Aura -> trigger -> apply Aura Mastery Immunity
@@ -1661,24 +1665,25 @@ void Aura::HandleAuraSpecificMods(AuraApplication const* aurApp, Unit* caster, b
                     }
                     break;
             }
-            if (GetSpellInfo()->GetSpellSpecific() == SPELL_SPECIFIC_AURA && target == caster)
+            if (GetSpellInfo()->GetSpellSpecific() == SPELL_SPECIFIC_AURA)
             {
-                // Improved concentration aura - linked aura
-                if (apply)
-                    target->CastSpell(target, 63510, true);
-                else
-                    target->RemoveAura(63510);
+                if (!caster)
+                    break;
+
                 // Improved devotion aura
-                if (apply)
-                    target->CastSpell(target, 63514, true);
-                else
-                    target->RemoveAura(63514);
-                // 63531 - linked aura for both Sanctified Retribution and Swift Retribution talents
-                // Not allow for Retribution Aura (prevent stacking)
-                if (!(GetSpellInfo()->SpellFamilyFlags[0] & 0x8 /* Retribution Aura */))
+                if (caster->HasAura(20140) || caster->HasAura(20138) || caster->HasAura(20139))
                 {
                     if (apply)
-                        target->CastSpell(target, 63531, true);
+                        caster->CastSpell(target, 63514, true);
+                    else
+                        target->RemoveAura(63514);
+                }
+                // 63531 - linked aura for both Sanctified Retribution and Swift Retribution talents
+                // Not allow for Retribution Aura (prevent stacking)
+                if ((GetSpellInfo()->SpellIconID != 555) && (caster->HasAura(53648) || caster->HasAura(53484) || caster->HasAura(53379) || caster->HasAura(31869)))
+                {
+                    if (apply)
+                        caster->CastSpell(target, 63531, true);
                     else
                         target->RemoveAura(63531);
                 }
@@ -1771,54 +1776,6 @@ void Aura::HandleAuraSpecificMods(AuraApplication const* aurApp, Unit* caster, b
                         target->RemoveAurasDueToSpell(49772);
                     }
                 }
-            }
-            // Improved Blood Presence
-            else if (GetSpellInfo()->SpellIconID == 2636 && GetSpellInfo()->IsPassive())
-            {
-                // if Frost or Unholy Presence is active
-                if (apply && (target->HasAura(48263) || target->HasAura(48265)))
-                {
-                    int32 basePoints1 = GetSpellInfo()->Effects[EFFECT_1].CalcValue();
-                    target->CastCustomSpell(target, 63611, NULL, &basePoints1, NULL, true, 0, GetEffect(EFFECT_1));
-                }
-                // if no Unholy Presence active
-                else if (!apply && !target->HasAura(48266))
-                    target->RemoveAurasDueToSpell(63611);
-                return;
-            }
-            // Improved Frost Presence
-            else if (GetSpellInfo()->SpellIconID == 2632 && GetSpellInfo()->IsPassive())
-            {
-                // if Unholy or Blood Presence is active
-                if (apply && (target->HasAura(48265) || target->HasAura(48266)))
-                {
-                    int32 basePoints0 = GetSpellInfo()->Effects[EFFECT_0].CalcValue();
-                    target->CastCustomSpell(target, 61261, &basePoints0, NULL, NULL, true, 0, GetEffect(EFFECT_0));
-                }
-                // if no Frost Presence is active
-                else if (!apply && !target->HasAura(48263))
-                    target->RemoveAurasDueToSpell(61261);
-                return;
-            }
-            // Improved Unholy Presence
-            else if (GetSpellInfo()->SpellIconID == 2633 && GetSpellInfo()->IsPassive())
-            {
-                // if Unholy Presence is active
-                if (apply && target->HasAura(48265))
-                {
-                    int32 basePoints0 = GetSpellInfo()->Effects[EFFECT_1].CalcValue();
-                    target->CastCustomSpell(target, 49772, &basePoints0, &basePoints0, &basePoints0, true, 0, GetEffect(EFFECT_1));
-                }
-                // if Blood or Frost presence is active
-                else if (apply && (target->HasAura(48266) || target->HasAura(48263)))
-                {
-                    int32 basePoints0 = GetSpellInfo()->Effects[EFFECT_0].CalcValue();
-                    target->CastCustomSpell(target, 49772, &basePoints0, NULL, NULL, true, 0, GetEffect(EFFECT_0));
-                }
-                // if no Unholy presence is active
-                else if (!apply && !target->HasAura(48265))
-                    target->RemoveAurasDueToSpell(49772);
-                return;
             }
             break;
         case SPELLFAMILY_WARLOCK:
@@ -1946,20 +1903,7 @@ bool Aura::CanStackWith(Aura const* existingAura) const
         }
     }
 
-    bool isVehicleAura1 = false;
-    bool isVehicleAura2 = false;
-    uint8 i = 0;
-    while (i < MAX_SPELL_EFFECTS && !(isVehicleAura1 && isVehicleAura2))
-    {
-        if (m_spellInfo->Effects[i].ApplyAuraName == SPELL_AURA_CONTROL_VEHICLE)
-            isVehicleAura1 = true;
-        if (existingSpellInfo->Effects[i].ApplyAuraName == SPELL_AURA_CONTROL_VEHICLE)
-            isVehicleAura2 = true;
-
-        ++i;
-    }
-
-    if (isVehicleAura1 && isVehicleAura2)
+    if (HasEffectType(SPELL_AURA_CONTROL_VEHICLE) && existingAura->HasEffectType(SPELL_AURA_CONTROL_VEHICLE))
     {
         Vehicle* veh = NULL;
         if (GetOwner()->ToUnit())
@@ -1971,7 +1915,7 @@ bool Aura::CanStackWith(Aura const* existingAura) const
         if (!veh->GetAvailableSeatCount())
             return false;   // No empty seat available
 
-        return true;        // Empty seat available (skip rest)
+        return true; // Empty seat available (skip rest)
     }
 
     // spell of same spell rank chain
@@ -2160,7 +2104,7 @@ void Aura::LoadScripts()
             m_loadedScripts.erase(bitr);
             continue;
         }
-        sLog->outDebug(LOG_FILTER_SPELLS_AURAS, "Aura::LoadScripts: Script `%s` for aura `%u` is loaded now", (*itr)->_GetScriptName()->c_str(), m_spellInfo->Id);
+        TC_LOG_DEBUG(LOG_FILTER_SPELLS_AURAS, "Aura::LoadScripts: Script `%s` for aura `%u` is loaded now", (*itr)->_GetScriptName()->c_str(), m_spellInfo->Id);
         (*itr)->Register();
         ++itr;
     }

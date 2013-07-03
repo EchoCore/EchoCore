@@ -22,7 +22,6 @@
 #include "DBCStores.h"
 #include "GroupReference.h"
 #include "MapReference.h"
-#include "Battleground.h"
 
 #include "Item.h"
 #include "PetDefines.h"
@@ -84,20 +83,6 @@ enum BuyBankSlotResult
     ERR_BANKSLOT_INSUFFICIENT_FUNDS = 1,
     ERR_BANKSLOT_NOTBANKER          = 2,
     ERR_BANKSLOT_OK                 = 3
-};
-
-enum TransmogrificationResult // custom
-{
-    ERR_FAKE_NEW_BAD_QUALITY,
-    ERR_FAKE_OLD_BAD_QUALITY,
-    ERR_FAKE_SAME_DISPLAY,
-    ERR_FAKE_SAME_DISPLAY_FAKE,
-    ERR_FAKE_CANT_USE,
-    ERR_FAKE_NOT_SAME_CLASS,
-    ERR_FAKE_BAD_CLASS,
-    ERR_FAKE_BAD_SUBLCASS,
-    ERR_FAKE_BAD_INVENTORYTYPE,
-    ERR_FAKE_OK
 };
 
 enum PlayerSpellState
@@ -423,27 +408,6 @@ enum PlayerFlags
     PLAYER_FLAGS_UNK31             = 0x80000000
 };
 
-#define PLAYER_TITLE_MASK_ALLIANCE_PVP \
-(PLAYER_TITLE_PRIVATE | PLAYER_TITLE_CORPORAL | \
-PLAYER_TITLE_SERGEANT_A | PLAYER_TITLE_MASTER_SERGEANT | \
-PLAYER_TITLE_SERGEANT_MAJOR | PLAYER_TITLE_KNIGHT | \
-PLAYER_TITLE_KNIGHT_LIEUTENANT | PLAYER_TITLE_KNIGHT_CAPTAIN | \
-PLAYER_TITLE_KNIGHT_CHAMPION | PLAYER_TITLE_LIEUTENANT_COMMANDER | \
-PLAYER_TITLE_COMMANDER | PLAYER_TITLE_MARSHAL | \
-PLAYER_TITLE_FIELD_MARSHAL | PLAYER_TITLE_GRAND_MARSHAL)
-
-#define PLAYER_TITLE_MASK_HORDE_PVP \
-(PLAYER_TITLE_SCOUT | PLAYER_TITLE_GRUNT | \
-PLAYER_TITLE_SERGEANT_H | PLAYER_TITLE_SENIOR_SERGEANT | \
-PLAYER_TITLE_FIRST_SERGEANT | PLAYER_TITLE_STONE_GUARD | \
-PLAYER_TITLE_BLOOD_GUARD | PLAYER_TITLE_LEGIONNAIRE | \
-PLAYER_TITLE_CENTURION | PLAYER_TITLE_CHAMPION | \
-PLAYER_TITLE_LIEUTENANT_GENERAL | PLAYER_TITLE_GENERAL | \
-PLAYER_TITLE_WARLORD | PLAYER_TITLE_HIGH_WARLORD)
-
-#define PLAYER_TITLE_MASK_ALL_PVP \
-(PLAYER_TITLE_MASK_ALLIANCE_PVP | PLAYER_TITLE_MASK_HORDE_PVP)
-
 // used for PLAYER__FIELD_KNOWN_TITLES field (uint64), (1<<bit_index) without (-1)
 // can't use enum for uint64 values
 #define PLAYER_TITLE_DISABLED              UI64LIT(0x0000000000000000)
@@ -543,8 +507,7 @@ enum AtLoginFlags
     AT_LOGIN_RESET_PET_TALENTS = 0x10,
     AT_LOGIN_FIRST             = 0x20,
     AT_LOGIN_CHANGE_FACTION    = 0x40,
-    AT_LOGIN_CHANGE_RACE       = 0x80,
-    CUSTOMFLAG_DOUBLE_RATE     = 0x200
+    AT_LOGIN_CHANGE_RACE       = 0x80
 };
 
 typedef std::map<uint32, QuestStatusData> QuestStatusMap;
@@ -1094,34 +1057,26 @@ private:
     bool _isPvP;
 };
 
-/* World of Warcraft Armory */
-struct WowarmoryFeedEntry {
-    uint32 guid;         // Player GUID
-    time_t date;         // Log date
-    uint32 type;         // TYPE_ACHIEVEMENT_FEED, TYPE_ITEM_FEED, TYPE_BOSS_FEED
-    uint32 data;         // TYPE_ITEM_FEED: item_entry, TYPE_BOSS_FEED: creature_entry
-    uint32 item_guid;    // Can be 0
-    uint32 item_quality; // Can be 0
-    uint8  difficulty;   // Can be 0
-    int    counter;      // Can be 0
-};
-
-typedef std::vector<WowarmoryFeedEntry> WowarmoryFeeds;
-/* World of Warcraft Armory */
-
 class Player : public Unit, public GridObject<Player>
 {
     friend class WorldSession;
     friend void Item::AddToUpdateQueueOf(Player* player);
     friend void Item::RemoveFromUpdateQueueOf(Player* player);
     public:
-        explicit Player (WorldSession* session);
+        explicit Player(WorldSession* session);
         ~Player();
 
         void CleanupsBeforeDelete(bool finalCleanup = true);
 
         void AddToWorld();
         void RemoveFromWorld();
+
+        void SetObjectScale(float scale)
+        {
+            Unit::SetObjectScale(scale);
+            SetFloatValue(UNIT_FIELD_BOUNDINGRADIUS, scale * DEFAULT_WORLD_OBJECT_SIZE);
+            SetFloatValue(UNIT_FIELD_COMBATREACH, scale * DEFAULT_COMBAT_REACH);
+        }
 
         bool TeleportTo(uint32 mapid, float x, float y, float z, float orientation, uint32 options = 0);
         bool TeleportTo(WorldLocation const &loc, uint32 options = 0);
@@ -1171,7 +1126,7 @@ class Player : public Unit, public GridObject<Player>
                                                             // mount_id can be used in scripting calls
         bool isAcceptWhispers() const { return m_ExtraFlags & PLAYER_EXTRA_ACCEPT_WHISPERS; }
         void SetAcceptWhispers(bool on) { if (on) m_ExtraFlags |= PLAYER_EXTRA_ACCEPT_WHISPERS; else m_ExtraFlags &= ~PLAYER_EXTRA_ACCEPT_WHISPERS; }
-        bool isGameMaster() const { return m_ExtraFlags & PLAYER_EXTRA_GM_ON; }
+        bool IsGameMaster() const { return m_ExtraFlags & PLAYER_EXTRA_GM_ON; }
         void SetGameMaster(bool on);
         bool isGMChat() const { return m_ExtraFlags & PLAYER_EXTRA_GM_CHAT; }
         void SetGMChat(bool on) { if (on) m_ExtraFlags |= PLAYER_EXTRA_GM_CHAT; else m_ExtraFlags &= ~PLAYER_EXTRA_GM_CHAT; }
@@ -1182,14 +1137,6 @@ class Player : public Unit, public GridObject<Player>
         bool Has310Flyer(bool checkAllSpells, uint32 excludeSpellId = 0);
         void SetHas310Flyer(bool on) { if (on) m_ExtraFlags |= PLAYER_EXTRA_HAS_310_FLYER; else m_ExtraFlags &= ~PLAYER_EXTRA_HAS_310_FLYER; }
         void SetPvPDeath(bool on) { if (on) m_ExtraFlags |= PLAYER_EXTRA_PVP_DEATH; else m_ExtraFlags &= ~PLAYER_EXTRA_PVP_DEATH; }
-
-        bool HaveSpectators();
-        void SendSpectatorAddonMsgToBG(SpectatorAddonMsg msg);
-        bool isSpectateCanceled() { return spectateCanceled; }
-        void CancelSpectate() { spectateCanceled = true; }
-        Unit* getSpectateFrom() { return spectateFrom; }
-        bool isSpectator() const { return spectatorFlag; }
-        void SetSpectate(bool on);
 
         void GiveXP(uint32 xp, Unit* victim, float group_rate=1.0f);
         void GiveLevel(uint8 level);
@@ -1344,12 +1291,6 @@ class Player : public Unit, public GridObject<Player>
         void AddArmorProficiency(uint32 newflag) { m_ArmorProficiency |= newflag; }
         uint32 GetWeaponProficiency() const { return m_WeaponProficiency; }
         uint32 GetArmorProficiency() const { return m_ArmorProficiency; }
-        bool HasTwoHandWeaponInOneHand() const
-        {
-            Item* offItem = GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_OFFHAND);
-            Item* mainItem = GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_MAINHAND);
-            return offItem && ((mainItem && mainItem->GetTemplate()->InventoryType == INVTYPE_2HWEAPON) || offItem->GetTemplate()->InventoryType == INVTYPE_2HWEAPON);
-        }
         bool IsUseEquipedWeapon(bool mainhand) const;
         bool IsTwoHandUsed() const;
         void SendNewItem(Item* item, uint32 count, bool received, bool created, bool broadcast = false);
@@ -1397,7 +1338,7 @@ class Player : public Unit, public GridObject<Player>
         uint32 GetGossipTextId(uint32 menuId, WorldObject* source);
         uint32 GetGossipTextId(WorldObject* source);
         static uint32 GetDefaultGossipMenuForSource(WorldObject* source);
-        
+
         /*********************************************************/
         /***                    QUEST SYSTEM                   ***/
         /*********************************************************/
@@ -1568,7 +1509,7 @@ class Player : public Unit, public GridObject<Player>
         uint64 GetSelection() const { return m_curSelection; }
         Unit* GetSelectedUnit() const;
         Player* GetSelectedPlayer() const;
-        void SetSelection(uint64 guid);
+        void SetSelection(uint64 guid) { m_curSelection = guid; SetUInt64Value(UNIT_FIELD_TARGET, guid); }
 
         uint8 GetComboPoints() const { return m_comboPoints; }
         uint64 GetComboTarget() const { return m_comboTarget; }
@@ -1980,7 +1921,6 @@ class Player : public Unit, public GridObject<Player>
         void ModifyHonorPoints(int32 value, SQLTransaction* trans = NULL);      //! If trans is specified, honor save query will be added to trans
         void ModifyArenaPoints(int32 value, SQLTransaction* trans = NULL);      //! If trans is specified, arena point save query will be added to trans
         uint32 GetMaxPersonalArenaRatingRequirement(uint32 minarenaslot) const;
-        void UpdateKnownTitles();
         void SetHonorPoints(uint32 value);
         void SetArenaPoints(uint32 value);
 
@@ -2004,7 +1944,7 @@ class Player : public Unit, public GridObject<Player>
         void SetCanBlock(bool value);
         bool CanTitanGrip() const { return m_canTitanGrip; }
         void SetCanTitanGrip(bool value) { m_canTitanGrip = value; }
-        bool CanTameExoticPets() const { return isGameMaster() || HasAuraType(SPELL_AURA_ALLOW_TAME_PET_TYPE); }
+        bool CanTameExoticPets() const { return IsGameMaster() || HasAuraType(SPELL_AURA_ALLOW_TAME_PET_TYPE); }
 
         void SetRegularAttackTime();
         void SetBaseModValue(BaseModGroup modGroup, BaseModType modType, float value) { m_auraBaseMod[modGroup][modType] = value; }
@@ -2220,11 +2160,6 @@ class Player : public Unit, public GridObject<Player>
         void SendCinematicStart(uint32 CinematicSequenceId);
         void SendMovieStart(uint32 MovieId);
 
-        /* World of Warcraft Armory */
-        void CreateWowarmoryFeed(uint32 type, uint32 data, uint32 item_guid, uint32 item_quality);
-        void InitWowarmoryFeeds();
-        /* World of Warcraft Armory */
-
         /*********************************************************/
         /***                 INSTANCE SYSTEM                   ***/
         /*********************************************************/
@@ -2331,7 +2266,7 @@ class Player : public Unit, public GridObject<Player>
         void SetTitle(CharTitlesEntry const* title, bool lost = false);
 
         //bool isActiveObject() const { return true; }
-        bool canSeeSpellClickOn(Creature const* creature) const;
+        bool CanSeeSpellClickOn(Creature const* creature) const;
 
         uint32 GetChampioningFaction() const { return m_ChampioningFaction; }
         void SetChampioningFaction(uint32 faction) { m_ChampioningFaction = faction; }
@@ -2345,25 +2280,16 @@ class Player : public Unit, public GridObject<Player>
         bool IsInWhisperWhiteList(uint64 guid);
         void RemoveFromWhisperWhiteList(uint64 guid) { WhisperList.remove(guid); }
 
-        /*! These methods send different packets to the client in apply and unapply case.
-            These methods are only sent to the current unit.
-        */
-        void SendMovementSetCanFly(bool apply);
-        void SendMovementSetCanTransitionBetweenSwimAndFly(bool apply);
-
-        // rates command
-        void HandleRates();
-
-        void SendMovementSetHover(bool apply);
-        void SendMovementSetWaterWalking(bool apply);
-        void SendMovementSetFeatherFall(bool apply);
+        bool SetDisableGravity(bool disable, bool packetOnly /* = false */);
+        bool SetCanFly(bool apply);
+        bool SetWaterWalking(bool apply, bool packetOnly = false);
+        bool SetFeatherFall(bool apply, bool packetOnly = false);
+        bool SetHover(bool enable, bool packetOnly = false);
 
         bool CanFly() const { return m_movementInfo.HasMovementFlag(MOVEMENTFLAG_CAN_FLY); }
 
         //! Return collision height sent to client
         float GetCollisionHeight(bool mounted) const;
-
-        uint32 SuitableForTransmogrification(Item* oldItem, Item* newItem); // custom
 
     protected:
         // Gamemaster whisper whitelist
@@ -2686,17 +2612,10 @@ class Player : public Unit, public GridObject<Player>
         uint32 m_timeSyncTimer;
         uint32 m_timeSyncClient;
         uint32 m_timeSyncServer;
-        // World of Warcraft Armory Feeds
-        WowarmoryFeeds m_wowarmory_feeds;
 
         InstanceTimeMap _instanceResetTimes;
         uint32 _pendingBindId;
         uint32 _pendingBindTimer;
-
-        // spectator system
-        bool spectatorFlag;
-        bool spectateCanceled;
-        Unit *spectateFrom;
 
         uint32 _activeCheats;
 };

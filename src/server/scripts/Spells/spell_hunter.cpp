@@ -50,7 +50,6 @@ enum HunterSpells
     SPELL_HUNTER_READINESS                          = 23989,
     SPELL_HUNTER_SNIPER_TRAINING_R1                 = 53302,
     SPELL_HUNTER_SNIPER_TRAINING_BUFF_R1            = 64418,
-    SPELL_HUNTER_SPELL_STEADY_SHOT_EFFECT           = 53220,
     SPELL_DRAENEI_GIFT_OF_THE_NAARU                 = 59543,
 };
 
@@ -192,8 +191,6 @@ class spell_hun_chimera_shot : public SpellScriptLoader
                                 basePoint = caster->SpellDamageBonusDone(unitTarget, aura->GetSpellInfo(), aurEff->GetAmount(), DOT, aura->GetStackAmount());
                                 ApplyPct(basePoint, TickCount * 40);
                                 basePoint = unitTarget->SpellDamageBonusTaken(caster, aura->GetSpellInfo(), basePoint, DOT, aura->GetStackAmount());
-                                if (caster->HasAura(SPELL_HUNTER_SPELL_STEADY_SHOT_EFFECT))
-                                    basePoint *= 1.15f;
                             }
                             // Viper Sting - Instantly restores mana to you equal to 60% of the total amount drained by your Viper Sting.
                             else if (familyFlag[1] & 0x00000080)
@@ -255,7 +252,7 @@ class spell_hun_disengage : public SpellScriptLoader
             SpellCastResult CheckCast()
             {
                 Unit* caster = GetCaster();
-                if (caster->GetTypeId() == TYPEID_PLAYER && !caster->isInCombat())
+                if (caster->GetTypeId() == TYPEID_PLAYER && !caster->IsInCombat())
                     return SPELL_FAILED_CANT_DO_THAT_RIGHT_NOW;
 
                 return SPELL_CAST_OK;
@@ -372,10 +369,6 @@ class spell_hun_masters_call : public SpellScriptLoader
                             TriggerCastFlags castMask = TriggerCastFlags(TRIGGERED_FULL_MASK & ~TRIGGERED_IGNORE_CASTER_AURASTATE);
                             target->CastSpell(ally, GetEffectValue(), castMask);
                             target->CastSpell(ally, GetSpellInfo()->Effects[EFFECT_0].CalcValue(), castMask);
-                            target->RemoveMovementImpairingAuras(); // remove already applied root and snare from pet
-                            caster->RemoveMovementImpairingAuras(); // remove already applied root and snare from pet's target
-                            caster->CastSpell(ally, GetEffectValue(), castMask); // this should remove already applied root and snare from pet's target, but not working
-                            caster->CastSpell(ally, GetSpellInfo()->Effects[EFFECT_0].CalcValue(), castMask); // apply 4s root and snare immunity to pet's target
                         }
             }
 
@@ -421,8 +414,7 @@ class spell_hun_misdirection : public SpellScriptLoader
 
             void OnRemove(AuraEffect const* /*aurEff*/, AuraEffectHandleModes /*mode*/)
             {
-                //if (GetTargetApplication()->GetRemoveMode() != AURA_REMOVE_BY_DEFAULT)
-                if (!GetDuration())
+                if (GetTargetApplication()->GetRemoveMode() != AURA_REMOVE_BY_DEFAULT)
                     GetTarget()->ResetRedirectThreat();
             }
 
@@ -490,7 +482,7 @@ class spell_hun_pet_carrion_feeder : public SpellScriptLoader
 
             bool Load()
             {
-                if (!GetCaster()->isPet())
+                if (!GetCaster()->IsPet())
                     return false;
                 return true;
             }
@@ -547,7 +539,7 @@ class spell_hun_pet_heart_of_the_phoenix : public SpellScriptLoader
 
             bool Load()
             {
-                if (!GetCaster()->isPet())
+                if (!GetCaster()->IsPet())
                     return false;
                 return true;
             }
@@ -696,7 +688,7 @@ class spell_hun_sniper_training : public SpellScriptLoader
                         {
                             SpellInfo const* triggeredSpellInfo = sSpellMgr->GetSpellInfo(spellId);
                             Unit* triggerCaster = triggeredSpellInfo->NeedsToBeTriggeredByCaster() ? caster : target;
-                            triggerCaster->CastSpell(target, triggeredSpellInfo, true, 0, aurEff, aurEff->GetCasterGUID());
+                            triggerCaster->CastSpell(target, triggeredSpellInfo, true, 0, aurEff);
                         }
                 }
             }
@@ -751,7 +743,7 @@ class spell_hun_tame_beast : public SpellScriptLoader
                         return SPELL_FAILED_HIGHLEVEL;
 
                     // use SMSG_PET_TAME_FAILURE?
-                    if (!target->GetCreatureTemplate()->isTameable(caster->ToPlayer()->CanTameExoticPets()))
+                    if (!target->GetCreatureTemplate()->IsTameable(caster->ToPlayer()->CanTameExoticPets()))
                         return SPELL_FAILED_BAD_TARGETS;
 
                     if (caster->GetPetGUID())

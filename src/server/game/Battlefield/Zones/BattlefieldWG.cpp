@@ -228,7 +228,7 @@ void BattlefieldWG::OnBattleStart()
         m_titansRelicGUID = relic->GetGUID();
     }
     else
-        sLog->outError(LOG_FILTER_BATTLEFIELD, "WG: Failed to spawn titan relic.");
+        TC_LOG_ERROR(LOG_FILTER_BATTLEFIELD, "WG: Failed to spawn titan relic.");
 
 
     // Update tower visibility and update faction
@@ -473,7 +473,7 @@ uint8 BattlefieldWG::GetSpiritGraveyardId(uint32 areaId) const
         case AREA_THE_CHILLED_QUAGMIRE:
             return BATTLEFIELD_WG_GY_HORDE;
         default:
-            sLog->outError(LOG_FILTER_BATTLEFIELD, "BattlefieldWG::GetSpiritGraveyardId: Unexpected Area Id %u", areaId);
+            TC_LOG_ERROR(LOG_FILTER_BATTLEFIELD, "BattlefieldWG::GetSpiritGraveyardId: Unexpected Area Id %u", areaId);
             break;
     }
 
@@ -795,7 +795,7 @@ void BattlefieldWG::OnPlayerEnterZone(Player* player)
     if (!m_isActive)
         RemoveAurasFromPlayer(player);
 
-    //player->AddAura(m_DefenderTeam == TEAM_HORDE ? SPELL_HORDE_CONTROL_PHASE_SHIFT : SPELL_ALLIANCE_CONTROL_PHASE_SHIFT, player);
+    player->AddAura(m_DefenderTeam == TEAM_HORDE ? SPELL_HORDE_CONTROL_PHASE_SHIFT : SPELL_ALLIANCE_CONTROL_PHASE_SHIFT, player);
     // Send worldstate to player
     SendInitWorldStatesTo(player);
 }

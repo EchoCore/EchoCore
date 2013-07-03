@@ -119,7 +119,10 @@ enum TrinityStrings
     LANG_RBAC_LIST_GROUPS_HEADER        = 93,
     LANG_RBAC_LIST_ROLES_HEADER         = 94,
     LANG_RBAC_LIST_PERMISSIONS_HEADER   = 95,
-    // Room for more level 0            96-99 not used
+    LANG_GUILD_RENAME_ALREADY_EXISTS    = 96,
+    LANG_GUILD_RENAME_DONE              = 97,
+    LANG_RENAME_PLAYER_ALREADY_EXISTS   = 98,
+    LANG_RENAME_PLAYER_WITH_NEW_NAME    = 99,
 
     // level 1 chat
     LANG_GLOBAL_NOTIFY                  = 100,
@@ -196,7 +199,7 @@ enum TrinityStrings
     LANG_COMMAND_TELE_NOTFOUND          = 164,
     LANG_COMMAND_TELE_PARAMETER         = 165,
     LANG_COMMAND_TELE_NOLOCATION        = 166,
-    //                                    167               // not used
+    LANG_RESERVED_NAME                  = 167,
     LANG_COMMAND_TELE_LOCATION          = 168,
 
     LANG_MAIL_SENT                      = 169,
@@ -206,7 +209,9 @@ enum TrinityStrings
     LANG_YOU_CHANGE_RUNIC_POWER         = 173,
     LANG_YOURS_RUNIC_POWER_CHANGED      = 174,
     LANG_LIQUID_STATUS                  = 175,
-    // Room for more level 1              176-199 not used
+    LANG_INVALID_GAMEOBJECT_TYPE        = 176,
+    LANG_GAMEOBJECT_DAMAGED             = 177,
+    // Room for more level 1              178-199 not used
 
     // level 2 chat
     LANG_NO_SELECTION                   = 200,
@@ -439,7 +444,7 @@ enum TrinityStrings
     LANG_COMMAND_GRAVEYARDALRLINKED     = 450,
     LANG_COMMAND_GRAVEYARDLINKED        = 451,
     LANG_COMMAND_GRAVEYARDWRONGZONE     = 452,
-    //                                  = 453, see LANG_PINFO_BAN
+    //                                  = 453, see LANG_PINFO_PLAYER
     LANG_COMMAND_GRAVEYARDERROR         = 454,
     LANG_COMMAND_GRAVEYARD_NOTEAM       = 455,
     LANG_COMMAND_GRAVEYARD_ANY          = 456,
@@ -550,13 +555,9 @@ enum TrinityStrings
     LANG_NPCINFO_TRAINER                = 546,
     LANG_NPCINFO_DUNGEON_ID             = 547,
 
-    LANG_PINFO_ACCOUNT                  = 548,
-    LANG_PINFO_LEVEL                    = 549,
-    LANG_PINFO_MUTE                     = 550,
-    LANG_PINFO_BAN                      = 453,
-    LANG_PINFO_MAP_ONLINE               = 714,
-    LANG_PINFO_MAP_OFFLINE              = 716,
-    LANG_PINFO_GUILD_INFO               = 749,
+    //                                  = 548, see LANG_PINFO_GM_ACTIVE
+    //                                  = 549, see LANG_PINFO_BANNED
+    //                                  = 550, see LANG_PINFO_MUTED
 
     LANG_YOU_SET_EXPLORE_ALL            = 551,
     LANG_YOU_SET_EXPLORE_NOTHING        = 552,
@@ -704,9 +705,9 @@ enum TrinityStrings
     LANG_BG_QUEUE_ANNOUNCE_SELF         = 711,
     LANG_BG_QUEUE_ANNOUNCE_WORLD        = 712,
     LANG_YOUR_ARENA_LEVEL_REQ_ERROR     = 713,
-//                                      = 714, see LANG_PINFO_MAP_ONLINE
+//                                      = 714, see LANG_PINFO_ACC_ACCOUNT
     LANG_YOUR_BG_LEVEL_REQ_ERROR        = 715,
-//                                      = 716, see LANG_PINFO_MAP_OFFLINE
+//                                      = 716, see LANG_PINFO_ACC_LASTLOGIN
     LANG_BG_STARTED_ANNOUNCE_WORLD      = 717,
     LANG_ARENA_QUEUE_ANNOUNCE_WORLD_JOIN= 718,
     LANG_ARENA_QUEUE_ANNOUNCE_WORLD_EXIT= 719,
@@ -741,10 +742,10 @@ enum TrinityStrings
     LANG_DIST_ARENA_POINTS_END          = 746,
     LANG_BG_DISABLED                    = 747,
     LANG_ARENA_DISABLED                 = 748,
-//                                      = 749, not used
+//                                      = 749, see LANG_PINFO_ACC_OS
     LANG_BATTLEGROUND_PREMATURE_FINISH_WARNING = 750,       // "Not enough players. This game will close in %u mins."
     LANG_BATTLEGROUND_PREMATURE_FINISH_WARNING_SECS = 751,  // "Not enough players. This game will close in %u seconds."
-//                                      = 752, not used
+//                                      = 752, see LANG_PINFO_ACC_IP
 //  LANG_BG_WS_START_TWO_MINUTES        = 753, - defined above
 //  LANG_BG_AB_START_TWO_MINUTES        = 754, - defined above
 //  LANG_BG_EY_START_TWO_MINUTES        = 755, - defined above
@@ -802,6 +803,32 @@ enum TrinityStrings
     LANG_NPCINFO_MAILBOX                = 841,
     LANG_NPCINFO_PLAYER_VEHICLE         = 842,
 
+    // Pinfo commands
+    LANG_PINFO_PLAYER                   = 453,
+    LANG_PINFO_GM_ACTIVE                = 548,
+    LANG_PINFO_BANNED                   = 549,
+    LANG_PINFO_MUTED                    = 550,
+    LANG_PINFO_ACC_ACCOUNT              = 714,
+    LANG_PINFO_ACC_LASTLOGIN            = 716,
+    LANG_PINFO_ACC_OS                   = 749,
+    LANG_PINFO_ACC_IP                   = 752,
+    LANG_PINFO_CHR_LEVEL_LOW            = 843,
+    LANG_PINFO_CHR_RACE                 = 844,
+    LANG_PINFO_CHR_ALIVE                = 845,
+    LANG_PINFO_CHR_PHASE                = 846,
+    LANG_PINFO_CHR_MONEY                = 847,
+    LANG_PINFO_CHR_MAP                  = 848,
+    LANG_PINFO_CHR_GUILD                = 849,
+    LANG_PINFO_CHR_GUILD_RANK           = 850,
+    LANG_PINFO_CHR_GUILD_NOTE           = 851,
+    LANG_PINFO_CHR_GUILD_ONOTE          = 852,
+    LANG_PINFO_CHR_PLAYEDTIME           = 853,
+    LANG_PINFO_CHR_MAILS                = 854,
+    LANG_PINFO_CHR_LEVEL_HIGH           = 871,
+
+    LANG_CHARACTER_GENDER_MALE          = 855,
+    LANG_CHARACTER_GENDER_FEMALE        = 856,
+
     LANG_ARENA_ERROR_NOT_FOUND          = 857,
     LANG_ARENA_ERROR_NAME_EXISTS        = 858,
     LANG_ARENA_ERROR_SIZE               = 859,
@@ -816,6 +843,8 @@ enum TrinityStrings
     LANG_ARENA_INFO_HEADER              = 868,
     LANG_ARENA_INFO_MEMBERS             = 869,
     LANG_ARENA_LOOKUP                   = 870,
+    //                                  = 871, see LANG_PINFO_CHR_LEVEL_HIGH
+    // Room for in-game strings           872-999 not used
 
     // Level 4 (CLI only commands)
     LANG_COMMAND_EXIT                   = 1000,
@@ -1185,50 +1214,6 @@ enum TrinityStrings
     // Use for custom patches             11000-11999
     LANG_AUTO_BROADCAST                 = 11000,
     LANG_INVALID_REALMID                = 11001,
-    LANG_BAN_CHEATER                    = 11002,
-
-    // Admin, GameMaster and Guard Announce
-    LANG_SYSTEMMESSAGE_ADMINISTRATOR    = 11666,
-    LANG_SYSTEMMESSAGE_GAMEMASTER       = 11667,
-    LANG_SYSTEMMESSAGE_GUARD            = 11668,
-    LANG_SYSTEMMESSAGE_DEVELOPER        = 11669,
-
-    // Fake players
-    LANG_FAKE_DND                       = 12003,
-
-    LANG_REM_TRANSMOGRIFICATIONS_ITEMS  = 11100,
-    LANG_ERR_NO_TRANSMOGRIFICATIONS     = 11101,
-    LANG_REM_TRANSMOGRIFICATION_ITEM    = 11102,
-    LANG_ERR_NO_TRANSMOGRIFICATION      = 11103,
-    LANG_ITEM_TRANSMOGRIFIED            = 11104,
-    LANG_ERR_NO_ITEM_SUITABLE           = 11105,
-    LANG_ERR_NO_ITEM_EXISTS             = 11106,
-    LANG_ERR_EQUIP_SLOT_EMPTY           = 11107,
-
-    LANG_SLOT_NAME_HEAD                 = 11108,
-    LANG_SLOT_NAME_SHOULDERS            = 11109,
-    LANG_SLOT_NAME_BODY                 = 11110,
-    LANG_SLOT_NAME_CHEST                = 11111,
-    LANG_SLOT_NAME_WAIST                = 11112,
-    LANG_SLOT_NAME_LEGS                 = 11113,
-    LANG_SLOT_NAME_FEET                 = 11114,
-    LANG_SLOT_NAME_WRISTS               = 11115,
-    LANG_SLOT_NAME_HANDS                = 11116,
-    LANG_SLOT_NAME_BACK                 = 11117,
-    LANG_SLOT_NAME_MAINHAND             = 11118,
-    LANG_SLOT_NAME_OFFHAND              = 11119,
-    LANG_SLOT_NAME_RANGED               = 11120,
-    LANG_SLOT_NAME_TABARD               = 11121,
-
-    LANG_OPTION_BACK                    = 11122,
-    LANG_OPTION_REMOVE_ALL              = 11123,
-    LANG_POPUP_REMOVE_ALL               = 11124,
-    LANG_OPTION_UPDATE_MENU             = 11125,
-    LANG_OPTION_REMOVE_ONE              = 11126,
-    LANG_POPUP_REMOVE_ONE               = 11127,
-    LANG_POPUP_TRANSMOGRIFY             = 11128,
-
-    LANG_ERR_NO_TOKEN                   = 11129
 
     // NOT RESERVED IDS                   12000-1999999999
     // `db_script_string` table index     2000000000-2000009999 (MIN_DB_SCRIPT_STRING_ID-MAX_DB_SCRIPT_STRING_ID)

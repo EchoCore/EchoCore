@@ -122,7 +122,7 @@ class ArenaTeam
         bool Create(uint64 captainGuid, uint8 type, std::string const& teamName, uint32 backgroundColor, uint8 emblemStyle, uint32 emblemColor, uint8 borderStyle, uint32 borderColor);
         void Disband(WorldSession* session);
         void Disband();
-        
+
         typedef std::list<ArenaTeamMember> MemberList;
 
         uint32 GetId() const              { return TeamId; }

@@ -19,7 +19,6 @@ set(scripts_STAT_SRCS
   Northrend/Ulduar/HallsOfLightning/boss_ionar.cpp
   Northrend/Ulduar/HallsOfLightning/boss_volkhan.cpp
   Northrend/Ulduar/HallsOfLightning/boss_loken.cpp
-  Northrend/Ulduar/HallsOfLightning/halls_of_lightning.cpp
   Northrend/Ulduar/Ulduar/boss_general_vezax.cpp
   Northrend/Ulduar/Ulduar/ulduar_teleporter.cpp
   Northrend/Ulduar/Ulduar/boss_thorim.cpp
@@ -27,7 +26,7 @@ set(scripts_STAT_SRCS
   Northrend/Ulduar/Ulduar/boss_algalon_the_observer.cpp
   Northrend/Ulduar/Ulduar/instance_ulduar.cpp
   Northrend/Ulduar/Ulduar/boss_auriaya.cpp
-  Northrend/Ulduar/Ulduar/boss_yoggsaron.cpp
+  Northrend/Ulduar/Ulduar/boss_yogg_saron.cpp
   Northrend/Ulduar/Ulduar/boss_hodir.cpp
   Northrend/Ulduar/Ulduar/boss_assembly_of_iron.cpp
   Northrend/Ulduar/Ulduar/boss_flame_leviathan.cpp
@@ -37,7 +36,6 @@ set(scripts_STAT_SRCS
   Northrend/Ulduar/Ulduar/boss_freya.cpp
   Northrend/Ulduar/Ulduar/boss_razorscale.cpp
   Northrend/Ulduar/Ulduar/boss_kologarn.cpp
-  Northrend/Ulduar/Ulduar/ulduar_trash.cpp
   Northrend/Ulduar/HallsOfStone/boss_krystallus.cpp
   Northrend/Ulduar/HallsOfStone/halls_of_stone.h
   Northrend/Ulduar/HallsOfStone/instance_halls_of_stone.cpp
@@ -59,8 +57,6 @@ set(scripts_STAT_SRCS
   Northrend/FrozenHalls/HallsOfReflection/instance_halls_of_reflection.cpp
   Northrend/FrozenHalls/HallsOfReflection/halls_of_reflection.cpp
   Northrend/FrozenHalls/HallsOfReflection/boss_marwyn.cpp
-  Northrend/FrozenHalls/HallsOfReflection/boss_lich_king_hor.cpp
-  Northrend/FrozenHalls/HallsOfReflection/npc_the_lich_king_hor.cpp
   Northrend/FrozenHalls/PitOfSaron/boss_forgemaster_garfrost.cpp
   Northrend/FrozenHalls/PitOfSaron/boss_krickandick.cpp
   Northrend/FrozenHalls/PitOfSaron/pit_of_saron.cpp
@@ -180,7 +176,6 @@ set(scripts_STAT_SRCS
   Northrend/IcecrownCitadel/boss_valithria_dreamwalker.cpp
   Northrend/IcecrownCitadel/boss_sindragosa.cpp
   Northrend/IcecrownCitadel/boss_the_lich_king.cpp
-  Northrend/IcecrownCitadel/icc_trash.cpp
   Northrend/zone_zuldrak.cpp
   Northrend/zone_icecrown.cpp
   Northrend/Gundrak/boss_slad_ran.cpp

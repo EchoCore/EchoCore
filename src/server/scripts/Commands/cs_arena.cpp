@@ -22,9 +22,12 @@ Comment: All arena team related commands
 Category: commandscripts
 EndScriptData */
 
+#include "ObjectMgr.h"
 #include "Chat.h"
 #include "Language.h"
 #include "ArenaTeamMgr.h"
+#include "Player.h"
+#include "ScriptMgr.h"
 
 class arena_commandscript : public CommandScript
 {
@@ -35,18 +38,18 @@ public:
     {
         static ChatCommand arenaCommandTable[] =
         {
-            { "create",         SEC_ADMINISTRATOR,  true, &HandleArenaCreateCommand,   "", NULL },
-            { "disband",        SEC_ADMINISTRATOR,  true, &HandleArenaDisbandCommand,  "", NULL },
-            { "rename",         SEC_ADMINISTRATOR,  true, &HandleArenaRenameCommand,   "", NULL },
+            { "create",         SEC_ADMINISTRATOR,  true,  &HandleArenaCreateCommand,   "", NULL },
+            { "disband",        SEC_ADMINISTRATOR,  true,  &HandleArenaDisbandCommand,  "", NULL },
+            { "rename",         SEC_ADMINISTRATOR,  true,  &HandleArenaRenameCommand,   "", NULL },
             { "captain",        SEC_ADMINISTRATOR,  false, &HandleArenaCaptainCommand,  "", NULL },
-            { "info",           SEC_GAMEMASTER,     true, &HandleArenaInfoCommand,     "", NULL },
+            { "info",           SEC_GAMEMASTER,     true,  &HandleArenaInfoCommand,     "", NULL },
             { "lookup",         SEC_GAMEMASTER,     false, &HandleArenaLookupCommand,   "", NULL },
             { NULL,             SEC_GAMEMASTER,     false, NULL,                        "", NULL }
         };
         static ChatCommand commandTable[] =
         {
-            { "arena",          SEC_GAMEMASTER,     false, NULL,     "",   arenaCommandTable  },
-            { NULL,             SEC_PLAYER,         false, NULL,                     "", NULL }
+            { "arena",          SEC_GAMEMASTER,     false, NULL,                       "", arenaCommandTable },
+            { NULL,             SEC_PLAYER,         false, NULL,                       "", NULL }
         };
         return commandTable;
     }
@@ -77,6 +80,7 @@ public:
             handler->SetSentErrorMessage(true);
             return false;
         }
+
         if (type == 2 || type == 3 || type == 5 )
         {
             if (Player::GetArenaTeamIdFromDB(target->GetGUID(), type) != 0)
@@ -113,15 +117,15 @@ public:
         if (!*args)
             return false;
 
-        uint32 teamid = atoi((char*)args);
-        if (!teamid)
+        uint32 teamId = atoi((char*)args);
+        if (!teamId)
             return false;
 
-        ArenaTeam* Arena = sArenaTeamMgr->GetArenaTeamById(teamid);
+        ArenaTeam* Arena = sArenaTeamMgr->GetArenaTeamById(teamId);
 
         if (!Arena)
         {
-            handler->PSendSysMessage(LANG_ARENA_ERROR_NOT_FOUND, teamid);
+            handler->PSendSysMessage(LANG_ARENA_ERROR_NOT_FOUND, teamId);
             handler->SetSentErrorMessage(true);
             return false;
         }
@@ -135,12 +139,12 @@ public:
         std::string name = Arena->GetName();
         Arena->Disband();
         if (handler->GetSession())
-            sLog->outDebug(LOG_FILTER_ARENAS, "GameMaster: %s [GUID: %u] disbanded arena team type: %u [Id: %u].", 
-                handler->GetSession()->GetPlayer()->GetName().c_str(), handler->GetSession()->GetPlayer()->GetGUIDLow(), Arena->GetType(), teamid);
+            TC_LOG_DEBUG(LOG_FILTER_ARENAS, "GameMaster: %s [GUID: %u] disbanded arena team type: %u [Id: %u].",
+                handler->GetSession()->GetPlayer()->GetName().c_str(), handler->GetSession()->GetPlayer()->GetGUIDLow(), Arena->GetType(), teamId);
         else
-            sLog->outDebug(LOG_FILTER_ARENAS, "Console: disbanded arena team type: %u [Id: %u].", Arena->GetType(), teamid);
+            TC_LOG_DEBUG(LOG_FILTER_ARENAS, "Console: disbanded arena team type: %u [Id: %u].", Arena->GetType(), teamId);
         delete(Arena);
-        handler->PSendSysMessage(LANG_ARENA_DISBAND, name.c_str(), teamid);
+        handler->PSendSysMessage(LANG_ARENA_DISBAND, name.c_str(), teamId);
         return true;
     }
 
@@ -149,7 +153,7 @@ public:
         if (!*_args)
             return false;
 
-        char *args = (char *)_args;
+        char* args = (char *)_args;
 
         char const* oldArenaStr = handler->extractQuotedArg(args);
         if (!oldArenaStr)
@@ -197,10 +201,10 @@ public:
         }
         handler->PSendSysMessage(LANG_ARENA_RENAME, Arena->GetId(), oldArenaStr, newArenaStr);
         if (handler->GetSession())
-            sLog->outDebug(LOG_FILTER_ARENAS, "GameMaster: %s [GUID: %u] rename arena team \"%s\"[Id: %u] to \"%s\"", 
+            TC_LOG_DEBUG(LOG_FILTER_ARENAS, "GameMaster: %s [GUID: %u] rename arena team \"%s\"[Id: %u] to \"%s\"",
                 handler->GetSession()->GetPlayer()->GetName().c_str(), handler->GetSession()->GetPlayer()->GetGUIDLow(), oldArenaStr, Arena->GetId(), newArenaStr);
         else
-            sLog->outDebug(LOG_FILTER_ARENAS, "Console: rename arena team \"%s\"[Id: %u] to \"%s\"", oldArenaStr, Arena->GetId(), newArenaStr);
+            TC_LOG_DEBUG(LOG_FILTER_ARENAS, "Console: rename arena team \"%s\"[Id: %u] to \"%s\"", oldArenaStr, Arena->GetId(), newArenaStr);
         return true;
     }
 
@@ -215,20 +219,20 @@ public:
         if (!idStr)
             return false;
 
-        uint32 teamid = atoi(idStr);
-        if (!teamid)
+        uint32 teamId = atoi(idStr);
+        if (!teamId)
             return false;
 
         Player* target;
-        uint64 target_guid;
-        if (!handler->extractPlayerTarget(nameStr, &target, &target_guid))
+        uint64 targetGuid;
+        if (!handler->extractPlayerTarget(nameStr, &target, &targetGuid))
             return false;
 
-        ArenaTeam *Arena = sArenaTeamMgr->GetArenaTeamById(teamid);
+        ArenaTeam* Arena = sArenaTeamMgr->GetArenaTeamById(teamId);
 
         if (!Arena)
         {
-            handler->PSendSysMessage(LANG_ARENA_ERROR_NOT_FOUND, teamid);
+            handler->PSendSysMessage(LANG_ARENA_ERROR_NOT_FOUND, teamId);
             handler->SetSentErrorMessage(true);
             return false;
         }
@@ -247,14 +251,14 @@ public:
             return false;
         }
 
-        if(!Arena->IsMember(target_guid))
+        if (!Arena->IsMember(targetGuid))
         {
             handler->PSendSysMessage(LANG_ARENA_ERROR_NOT_MEMBER, nameStr, Arena->GetName().c_str());
             handler->SetSentErrorMessage(true);
             return false;
         }
 
-        if(Arena->GetCaptain() == target_guid)
+        if (Arena->GetCaptain() == targetGuid)
         {
             handler->PSendSysMessage(LANG_ARENA_ERROR_CAPTAIN, nameStr, Arena->GetName().c_str());
             handler->SetSentErrorMessage(true);
@@ -262,13 +266,13 @@ public:
         }
 
         Player* oldCaptain = sObjectMgr->GetPlayerByLowGUID(Arena->GetCaptain());
-        Arena->SetCaptain(target_guid);
+        Arena->SetCaptain(targetGuid);
         handler->PSendSysMessage(LANG_ARENA_CAPTAIN, Arena->GetName().c_str(), Arena->GetId(), oldCaptain->GetName().c_str(), target->GetName().c_str());
         if (handler->GetSession())
-            sLog->outDebug(LOG_FILTER_ARENAS, "GameMaster: %s [GUID: %u] promoted player: %s [GUID: %u] to leader of arena team \"%s\"[Id: %u]",
+            TC_LOG_DEBUG(LOG_FILTER_ARENAS, "GameMaster: %s [GUID: %u] promoted player: %s [GUID: %u] to leader of arena team \"%s\"[Id: %u]",
                 handler->GetSession()->GetPlayer()->GetName().c_str(), handler->GetSession()->GetPlayer()->GetGUIDLow(), target->GetName().c_str(), target->GetGUIDLow(), Arena->GetName().c_str(), Arena->GetId());
         else
-            sLog->outDebug(LOG_FILTER_ARENAS, "Console: promoted player: %s [GUID: %u] to leader of arena team \"%s\"[Id: %u]", 
+            TC_LOG_DEBUG(LOG_FILTER_ARENAS, "Console: promoted player: %s [GUID: %u] to leader of arena team \"%s\"[Id: %u]",
                 target->GetName().c_str(), target->GetGUIDLow(), Arena->GetName().c_str(), Arena->GetId());
         return true;
     }
@@ -278,15 +282,15 @@ public:
         if (!*args)
             return false;
 
-        uint32 teamid = atoi((char*)args);
-        if (!teamid)
+        uint32 teamId = atoi((char*)args);
+        if (!teamId)
             return false;
 
-        ArenaTeam *Arena = sArenaTeamMgr->GetArenaTeamById(teamid);
+        ArenaTeam* Arena = sArenaTeamMgr->GetArenaTeamById(teamId);
 
         if (!Arena)
         {
-            handler->PSendSysMessage(LANG_ARENA_ERROR_NOT_FOUND, teamid);
+            handler->PSendSysMessage(LANG_ARENA_ERROR_NOT_FOUND, teamId);
             handler->SetSentErrorMessage(true);
             return false;
         }
@@ -316,12 +320,10 @@ public:
         ArenaTeamMgr::ArenaTeamContainer::const_iterator i = sArenaTeamMgr->GetArenaTeamMapBegin();
         for (; i != sArenaTeamMgr->GetArenaTeamMapEnd(); ++i)
         {
-            ArenaTeam *Arena = i->second;
+            ArenaTeam* Arena = i->second;
 
             if (Utf8FitTo(Arena->GetName(), wnamepart))
             {
-                uint32 teamid = Arena->GetId();
-
                 if (handler->GetSession())
                     handler->PSendSysMessage(LANG_ARENA_LOOKUP, Arena->GetName().c_str(), Arena->GetId(), Arena->GetType(), Arena->GetType());
 

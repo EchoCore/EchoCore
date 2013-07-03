@@ -289,7 +289,7 @@ class Item : public Object
         void SetItemRandomProperties(int32 randomPropId);
         void UpdateItemSuffixFactor();
         static int32 GenerateItemRandomPropertyId(uint32 item_id);
-        void SetEnchantment(EnchantmentSlot slot, uint32 id, uint32 duration, uint32 charges);
+        void SetEnchantment(EnchantmentSlot slot, uint32 id, uint32 duration, uint32 charges, uint64 caster = 0);
         void SetEnchantmentDuration(EnchantmentSlot slot, uint32 duration, Player* owner);
         void SetEnchantmentCharges(EnchantmentSlot slot, uint32 charges);
         void ClearEnchantment(EnchantmentSlot slot);
@@ -299,6 +299,8 @@ class Item : public Object
 
         std::string const& GetText() const { return m_text; }
         void SetText(std::string const& text) { m_text = text; }
+
+        void SendUpdateSockets();
 
         void SendTimeUpdate(Player* owner);
         void UpdateDuration(Player* owner, uint32 diff);
@@ -349,12 +351,6 @@ class Item : public Object
         bool CheckSoulboundTradeExpire();
 
         void BuildUpdate(UpdateDataMapType&);
-
-        // custom
-        uint32 GetFakeEntry();
-        bool DeleteFakeEntry();
-        static void DeleteFakeFromDB(uint32 lowGUID);
-        void SetFakeEntry(uint32 entry);
 
         uint32 GetScriptId() const { return GetTemplate()->ScriptId; }
     private:
