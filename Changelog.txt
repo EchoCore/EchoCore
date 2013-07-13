@@ -10,6 +10,7 @@
 #                                                                       #
 #########################################################################
 
+[61] --> DB/Quest: Fix: Add support for the Sons of Hodir Questline (Thx Kirkhammett)
 [60] --> DB/Quests: Amphitheater of Anguish in Zul'Drak (Thx malcrom)
           - DB/Gossip: Add: Missing gossip for Gurgthock
           - DB/Creature: Add: Missing spawns for Amphitheater of Anguish
