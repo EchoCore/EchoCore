@@ -10,6 +10,7 @@
 #                                                                       #
 #########################################################################
 
+[62] --> DB/Script: Update: Implement Headless Horseman Script
 [61] --> DB/Quest: Fix: Add support for the Sons of Hodir Questline (Thx Kirkhammett)
 [60] --> DB/Quests: Amphitheater of Anguish in Zul'Drak (Thx malcrom)
           - DB/Gossip: Add: Missing gossip for Gurgthock
