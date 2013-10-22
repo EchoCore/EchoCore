@@ -10,27 +10,28 @@
 #                                                                       #
 #########################################################################
 
-[62] --> DB/Script: Update: Implement Headless Horseman Script
-[61] --> DB/Quest: Fix: Add support for the Sons of Hodir Questline (Thx Kirkhammett)
-[60] --> DB/Quests: Amphitheater of Anguish in Zul'Drak (Thx malcrom)
-          - DB/Gossip: Add: Missing gossip for Gurgthock
-          - DB/Creature: Add: Missing spawns for Amphitheater of Anguish
-          - DB/Creature: Add: Missing text for Amphitheater Vendor
-          - DB/Waypoints: Add: Waypoints for two Amphitheater Vendors (30098)
-[59] --> DB/CPP/Quest: Fix: Troll Patrol: The Alchemist's Apprentice (12541) and Lab Work (12557) (Thx malcrom)
-          - Add german text translation for Alchemist Finklestein (28205)
-[58] --> DB/CPP/Instance: Update: Halls Of Reflection (Thx Torrad)
-[57] --> DB/Quest: Fix: Second Chances (12847) (Thx Pitcrawler)
-[56] --> DB/Quest: Fix: Convocation at Zol'Heb (12730) (Thx Pitcrawler)
-[55] --> DB/Quest: Fix: Badlands Reagent Run II (2203) (Thx Pitcrawler, joschiwald and Kirkhammett)
-[54] --> DB/Quest: Fix: A Blade Fit For A Champion (Daily, 13741) (Thx malcrom and Aokromes)
-[53] --> Implement/Fix: Portbacksystem for Dalaran Sewer Arena (Thx Torrad)
-[52] --> Implement Top 5 Arenateams / Modify Top 5 Players (Thx Garyfisher & Torrad)
-[51] --> DB/Quest: Fix: The Art of Being a Water Terror (13091) (Thx Kirkhammett)
-[50] --> DB/Quest: Fix/Update: Foolish Endeavors (Thx by dr-j & Pitcrawler)
-[49] --> DB/Quest: Fix: The Explorers' League Outpost (11448), We Can Rebuild It (11483) (Thx Pitcrawler)
-[48] --> DB/Quest: Fix: Danger! Explosives! (11218) (Thx Pitcrawler)
-[47] --> DB/Quest: Fix: Quest To Westguard Keep! (11291) (Thx Pitcrawler)
+[63] --> DB/Faction: Update: Correct factions for NPC's in Astranaar.
+[62] --> DB/Script: Update: Implement Headless Horseman Script.
+[61] --> DB/Quest: Fix: Add support for the Sons of Hodir Questline. (Thx Kirkhammett)
+[60] --> DB/Quests: Amphitheater of Anguish in Zul'Drak. (Thx malcrom)
+          - DB/Gossip: Add: Missing gossip for Gurgthock.
+          - DB/Creature: Add: Missing spawns for Amphitheater of Anguish.
+          - DB/Creature: Add: Missing text for Amphitheater Vendor.
+          - DB/Waypoints: Add: Waypoints for two Amphitheater Vendors. (30098)
+[59] --> DB/CPP/Quest: Fix: Troll Patrol: The Alchemist's Apprentice (12541) and Lab Work (12557). (Thx malcrom)
+          - Add german text translation for Alchemist Finklestein (28205).
+[58] --> DB/CPP/Instance: Update: Halls Of Reflection. (Thx Torrad)
+[57] --> DB/Quest: Fix: Second Chances (12847). (Thx Pitcrawler)
+[56] --> DB/Quest: Fix: Convocation at Zol'Heb (12730). (Thx Pitcrawler)
+[55] --> DB/Quest: Fix: Badlands Reagent Run II (2203). (Thx Pitcrawler, joschiwald and Kirkhammett)
+[54] --> DB/Quest: Fix: A Blade Fit For A Champion (Daily, 13741). (Thx malcrom and Aokromes)
+[53] --> Implement/Fix: Portbacksystem for Dalaran Sewer Arena. (Thx Torrad)
+[52] --> Implement Top 5 Arenateams / Modify Top 5 Players. (Thx Garyfisher & Torrad)
+[51] --> DB/Quest: Fix: The Art of Being a Water Terror (13091). (Thx Kirkhammett)
+[50] --> DB/Quest: Fix/Update: Foolish Endeavors. (Thx by dr-j & Pitcrawler)
+[49] --> DB/Quest: Fix: The Explorers' League Outpost (11448), We Can Rebuild It (11483). (Thx Pitcrawler)
+[48] --> DB/Quest: Fix: Danger! Explosives! (11218). (Thx Pitcrawler)
+[47] --> DB/Quest: Fix: Quest To Westguard Keep! (11291). (Thx Pitcrawler)
 [46] --> Implement .arena commands - add new commands to the core to handle with arena teams. (Thx Bezo)
 [45] --> Correct despawn of Lord Victor Nefarius in Blackwing Lair. (Thx Torrad)
 [44] --> Correct use of bubble by Argent Confessor Paletress / Trial of the Champion. (Thx Torrad)
